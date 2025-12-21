@@ -1,0 +1,24 @@
+class metricUtils {
+    static get METRICS () {
+        return {
+            GMB_REINSTETAMENT: "gmb_reinstatement",
+            GMB_VERIFICATION: "gmb_verification",
+            REVIEW_REMOVAL: "review_removal",
+            GOOGLE_PERFORMANCE: {
+                BUSINESS_IMPRESSIONS_DESKTOP_MAPS: "BUSINESS_IMPRESSIONS_DESKTOP_MAPS",
+                BUSINESS_IMPRESSIONS_DESKTOP_SEARCH: "BUSINESS_IMPRESSIONS_DESKTOP_SEARCH",
+                BUSINESS_IMPRESSIONS_MOBILE_MAPS: "BUSINESS_IMPRESSIONS_MOBILE_MAPS",
+                BUSINESS_IMPRESSIONS_MOBILE_SEARCH: "BUSINESS_IMPRESSIONS_MOBILE_SEARCH",
+                BUSINESS_CONVERSATIONS: "BUSINESS_CONVERSATIONS",
+                BUSINESS_DIRECTION_REQUESTS: "BUSINESS_DIRECTION_REQUESTS",
+                CALL_CLICKS: "CALL_CLICKS",
+                WEBSITE_CLICKS: "WEBSITE_CLICKS",
+                BUSINESS_BOOKINGS: "BUSINESS_BOOKINGS",
+                BUSINESS_FOOD_ORDERS: "BUSINESS_FOOD_ORDERS",
+                BUSINESS_FOOD_MENU_CLICKS: "BUSINESS_FOOD_MENU_CLICKS",
+            },
+        };
+    }
+    
+}
+module.exports = metricUtils;
