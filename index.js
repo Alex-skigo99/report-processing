@@ -2,13 +2,10 @@ const axios = require("axios");
 const { S3Client, PutObjectCommand } = require("@aws-sdk/client-s3");
 const knex = require("/opt/nodejs/db");
 const DatabaseTableConstants = require("/opt/nodejs/DatabaseTableConstants");
-const FetchGoogleTokensUtils = require("/opt/nodejs/FetchGoogleTokensUtils");
 const layerS3BucketConstants = require("/opt/nodejs/S3BucketConstants");
-const layerUtils = require("/opt/nodejs/utils");
 const NotificationTypeConstants = require("/opt/nodejs/NotificationTypeConstants");
 const WebSocketFlags = require("/opt/nodejs/WebsocketFlags");
 const WebsocketUtils = require("/opt/nodejs/WebsocketUtils");
-const SqsUtils = require("/opt/nodejs/SqsUtils");
 const Utils = require("./utils");
 const metricUtils = require("./metricUtils");
 const { generateReportHTML } = require("./htmlGenerator");
@@ -30,7 +27,6 @@ exports.handler = async (event) => {
     try {
         console.log("Starting report generation for report_id:", report_id);
 
-        // Fetch report details from database
         const reportRecord = await knex(DatabaseTableConstants.AGENCY_REPORT_TABLE)
             .where("id", report_id)
             .first();
@@ -39,13 +35,11 @@ exports.handler = async (event) => {
             throw new Error(`Report with id ${report_id} not found`);
         }
 
-        // Fetch organization name
         const organization = await knex(DatabaseTableConstants.ORGANIZATION_TABLE)
             .select("name")
             .where("id", organization_id)
             .first();
 
-        // Parse metrics and sub_accounts if they're strings
         const metricsList = typeof metrics === "string" ? metrics.split(",").map(m => m.trim()) : metrics;
         const subAccountsList = typeof sub_accounts === "string" ? JSON.parse(sub_accounts) : sub_accounts;
 
@@ -60,7 +54,6 @@ exports.handler = async (event) => {
             })
         );
 
-        // Process all metrics for all sub-accounts
         console.log("Processing metrics...");
         const processedMetrics = [];
 
@@ -87,7 +80,6 @@ exports.handler = async (event) => {
 
         console.log("Metrics processed successfully");
 
-        // Generate HTML
         console.log("Generating HTML...");
         const html = generateReportHTML({
             title: reportRecord.title,
@@ -97,7 +89,6 @@ exports.handler = async (event) => {
             metrics: processedMetrics,
         });
 
-        // Generate PDF from HTML
         console.log("Generating PDF...");
         const options = {
             format: "A4",
@@ -116,7 +107,6 @@ exports.handler = async (event) => {
         // Calculate page count (approximate: 1 page ~= 3000 bytes for formatted content)
         pageCount = Math.max(1, Math.ceil(pdfBuffer.length / 3000));
 
-        // Upload PDF to S3
         console.log("Uploading PDF to S3...");
         const s3Key = `${organization_id}/${report_id}.pdf`;
         
@@ -129,7 +119,6 @@ exports.handler = async (event) => {
 
         console.log(`PDF uploaded to S3: ${BUCKET}/${s3Key}`);
 
-        // Update report status to completed
         reportStatus = "completed";
 
         await knex(DatabaseTableConstants.AGENCY_REPORT_TABLE)
@@ -142,7 +131,6 @@ exports.handler = async (event) => {
 
         console.log("Report status updated to completed");
 
-        // Create notification
         await knex.transaction(async (trx) => {
             const notificationData = {
                 id: report_id,
@@ -158,7 +146,6 @@ exports.handler = async (event) => {
                 data: notificationData,
             });
 
-            // Broadcast websocket message
             await WebsocketUtils.broadcastWebsocketMessageToOrganization(
                 organization_id,
                 WebSocketFlags.NEW_NOTIFICATION,
@@ -175,7 +162,6 @@ exports.handler = async (event) => {
         console.error("Error generating report:", error);
         reportStatus = "failed";
 
-        // Update report status to failed
         await knex(DatabaseTableConstants.AGENCY_REPORT_TABLE)
             .where("id", report_id)
             .update({
@@ -183,7 +169,6 @@ exports.handler = async (event) => {
                 updated_at: knex.fn.now(),
             });
 
-        // Create failure notification
         try {
             await knex.transaction(async (trx) => {
                 const reportRecord = await knex(DatabaseTableConstants.AGENCY_REPORT_TABLE)
@@ -204,7 +189,6 @@ exports.handler = async (event) => {
                     data: notificationData,
                 });
 
-                // Broadcast websocket message for failure
                 await WebsocketUtils.broadcastWebsocketMessageToOrganization(
                     organization_id,
                     WebSocketFlags.NEW_NOTIFICATION,

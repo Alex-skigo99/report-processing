@@ -1,7 +1,6 @@
 const knex = require("/opt/nodejs/db");
 const DatabaseTableConstants = require("/opt/nodejs/DatabaseTableConstants");
 const FetchGoogleTokensUtils = require("/opt/nodejs/FetchGoogleTokensUtils");
-const layerS3BucketConstants = require("/opt/nodejs/S3BucketConstants");
 const layerUtils = require("/opt/nodejs/utils");
 
 class Utils {
