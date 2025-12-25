@@ -1,7 +1,7 @@
 const knex = require("/opt/nodejs/db");
 const DatabaseTableConstants = require("/opt/nodejs/DatabaseTableConstants");
-const FetchGoogleTokensUtils = require("/opt/nodejs/FetchGoogleTokensUtils");
 const axios = require("axios");
+const Utils = require("./utils");
 
 class metricUtils {
     static get METRICS () {
@@ -57,30 +57,30 @@ class metricUtils {
     }
 
     static async processGMBReinstatement({ subAccount, startDate, endDate }) {
-        const submissions = await knex(DatabaseTableConstants.REINSTATEMENT_WIZARD_SUBMISSION_TABLE)
+        const submissions = await knex({r: DatabaseTableConstants.REINSTATEMENT_WIZARD_SUBMISSION_TABLE})
+            .leftJoin(
+                {s: DatabaseTableConstants.SUBMISSION_STATUS_TABLE},
+                "r.status_id",
+                "s.id"
+            )
+            .leftJoin(
+                {i: DatabaseTableConstants.INVOICE_STATUS_TABLE},
+                "r.invoice_status_id",
+                "i.id"
+            )
             .select(
-                `${DatabaseTableConstants.REINSTATEMENT_WIZARD_SUBMISSION_TABLE}.google_listing_name`,
-                `${DatabaseTableConstants.REINSTATEMENT_WIZARD_SUBMISSION_TABLE}.updated_at`,
-                `${DatabaseTableConstants.SUBMISSION_STATUS_TABLE}.human_readable_status as status`,
-                `${DatabaseTableConstants.INVOICE_STATUS_TABLE}.human_readable_status as invoice_status`
+                "r.google_listing_name",
+                "r.updated_at",
+                "s.human_readable_status as status",
+                "i.human_readable_status as invoice_status"
             )
-            .leftJoin(
-                DatabaseTableConstants.SUBMISSION_STATUS_TABLE,
-                `${DatabaseTableConstants.REINSTATEMENT_WIZARD_SUBMISSION_TABLE}.status_id`,
-                `${DatabaseTableConstants.SUBMISSION_STATUS_TABLE}.id`
-            )
-            .leftJoin(
-                DatabaseTableConstants.INVOICE_STATUS_TABLE,
-                `${DatabaseTableConstants.REINSTATEMENT_WIZARD_SUBMISSION_TABLE}.invoice_status_id`,
-                `${DatabaseTableConstants.INVOICE_STATUS_TABLE}.id`
-            )
-            .where(`${DatabaseTableConstants.REINSTATEMENT_WIZARD_SUBMISSION_TABLE}.organization_id`, subAccount.sub_account_id)
-            .whereBetween(`${DatabaseTableConstants.REINSTATEMENT_WIZARD_SUBMISSION_TABLE}.updated_at`, [startDate, endDate])
-            .orderBy(`${DatabaseTableConstants.REINSTATEMENT_WIZARD_SUBMISSION_TABLE}.updated_at`, "desc");
+            .where("r.organization_id", subAccount.sub_account)
+            .whereBetween("r.updated_at", [startDate, endDate])
+            .orderBy("r.updated_at", "desc");
 
         return {
             type: this.METRICS.GMB_REINSTATEMENT,
-            subAccountId: subAccount.sub_account_id,
+            subAccountId: subAccount.sub_account,
             subAccountName: subAccount.name,
             submissions,
             totalCount: submissions.length,
@@ -89,30 +89,30 @@ class metricUtils {
     }
 
     static async processGMBVerification({ subAccount, startDate, endDate }) {
-        const submissions = await knex(DatabaseTableConstants.NEW_GMB_LOCATION_WIZARD_SUBMISSION_TABLE)
+        const submissions = await knex({ n: DatabaseTableConstants.NEW_GMB_LOCATION_WIZARD_SUBMISSION_TABLE })
+            .leftJoin(
+            { s: DatabaseTableConstants.SUBMISSION_STATUS_TABLE },
+                "n.status_id",
+                "s.id"
+            )
+            .leftJoin(
+            { i: DatabaseTableConstants.INVOICE_STATUS_TABLE },
+                "n.invoice_status_id",
+                "i.id"
+            )
             .select(
-                `${DatabaseTableConstants.NEW_GMB_LOCATION_WIZARD_SUBMISSION_TABLE}.business_name`,
-                `${DatabaseTableConstants.NEW_GMB_LOCATION_WIZARD_SUBMISSION_TABLE}.updated_at`,
-                `${DatabaseTableConstants.SUBMISSION_STATUS_TABLE}.human_readable_status as status`,
-                `${DatabaseTableConstants.INVOICE_STATUS_TABLE}.human_readable_status as invoice_status`
+                "n.business_name",
+                "n.updated_at",
+                "s.human_readable_status as status",
+                "i.human_readable_status as invoice_status"
             )
-            .leftJoin(
-                DatabaseTableConstants.SUBMISSION_STATUS_TABLE,
-                `${DatabaseTableConstants.NEW_GMB_LOCATION_WIZARD_SUBMISSION_TABLE}.status_id`,
-                `${DatabaseTableConstants.SUBMISSION_STATUS_TABLE}.id`
-            )
-            .leftJoin(
-                DatabaseTableConstants.INVOICE_STATUS_TABLE,
-                `${DatabaseTableConstants.NEW_GMB_LOCATION_WIZARD_SUBMISSION_TABLE}.invoice_status_id`,
-                `${DatabaseTableConstants.INVOICE_STATUS_TABLE}.id`
-            )
-            .where(`${DatabaseTableConstants.NEW_GMB_LOCATION_WIZARD_SUBMISSION_TABLE}.organization_id`, subAccount.sub_account_id)
-            .whereBetween(`${DatabaseTableConstants.NEW_GMB_LOCATION_WIZARD_SUBMISSION_TABLE}.updated_at`, [startDate, endDate])
-            .orderBy(`${DatabaseTableConstants.NEW_GMB_LOCATION_WIZARD_SUBMISSION_TABLE}.updated_at`, "desc");
+            .where("n.organization_id", subAccount.sub_account)
+            .whereBetween("n.updated_at", [startDate, endDate])
+            .orderBy("n.updated_at", "desc");
 
         return {
             type: this.METRICS.GMB_VERIFICATION,
-            subAccountId: subAccount.sub_account_id,
+            subAccountId: subAccount.sub_account,
             subAccountName: subAccount.name,
             submissions,
             totalCount: submissions.length,
@@ -202,7 +202,9 @@ class metricUtils {
         console.log(`Fetched Google metric time series for GMB ID ${gmbId}, Metric ${dailyMetric}:`, response.data);
         // Extract time series data
         if (response.data && response.data.multiDailyMetricTimeSeries && response.data.multiDailyMetricTimeSeries.length > 0) {
-            return response.data.multiDailyMetricTimeSeries[0].timeSeries?.datedValues || [];
+            const timeSeries = response.data.multiDailyMetricTimeSeries[0].dailyMetricTimeSeries || [];
+            console.log("Time series data:", timeSeries);
+            return timeSeries;
         }
 
         return [];

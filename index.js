@@ -195,6 +195,7 @@ exports.handler = async (event) => {
                     notificationData,
                     {},
                 );
+                console.log("Failure websocket message sent successfully");
             });
         } catch (notificationError) {
             console.error("Error sending failure notification:", notificationError);
