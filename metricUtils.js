@@ -25,12 +25,6 @@ class metricUtils {
         };
     }
 
-    /**
-     * Process a single metric
-     * @param {string} metricType - Type of metric to process
-     * @param {Object} params - Parameters for processing
-     * @returns {Promise<Object>} Processed metric data
-     */
     static async processMetric(metricType, params) {
         const metricKey = metricType.toUpperCase().replace(/\./g, "_");
         
@@ -46,7 +40,7 @@ class metricUtils {
                 return await this.processGooglePerformance(params, metricType);
             }
 
-            console.warn(`No processor found for metric type: ${metricType}`);
+            console.log(`No processor found for metric type: ${metricType}`);
             return {
                 type: metricType,
                 error: "Unsupported metric type",
@@ -62,10 +56,6 @@ class metricUtils {
         }
     }
 
-    /**
-     * Process GMB Reinstatement metric
-     * Fetches submission data from REINSTATEMENT_WIZARD_SUBMISSION_TABLE
-     */
     static async processGMBReinstatement({ subAccount, startDate, endDate }) {
         const submissions = await knex(DatabaseTableConstants.REINSTATEMENT_WIZARD_SUBMISSION_TABLE)
             .select(
@@ -98,10 +88,6 @@ class metricUtils {
         };
     }
 
-    /**
-     * Process GMB Verification metric
-     * Fetches submission data from NEW_GMB_LOCATION_WIZARD_SUBMISSION_TABLE
-     */
     static async processGMBVerification({ subAccount, startDate, endDate }) {
         const submissions = await knex(DatabaseTableConstants.NEW_GMB_LOCATION_WIZARD_SUBMISSION_TABLE)
             .select(
@@ -134,10 +120,6 @@ class metricUtils {
         };
     }
 
-    /**
-     * Process Google Performance metric
-     * Fetches time series data for specified metric from Google Business Profile API
-     */
     static async processGooglePerformance({ subAccount, startDate, endDate, organizationId }, dailyMetric) {
         const locations = await knex(DatabaseTableConstants.GMB_LOCATION_TABLE)
             .select("business_name", "locality", "address_lines", "gmb_id", "account_id")
@@ -187,9 +169,6 @@ class metricUtils {
         };
     }
 
-    /**
-     * Fetch time series data from Google Business Profile API
-     */
     static async fetchGoogleMetricTimeSeries(accountId, organizationId, gmbId, dailyMetric, startDate, endDate) {
         const start = new Date(startDate);
         const end = new Date(endDate);
@@ -226,9 +205,6 @@ class metricUtils {
         return [];
     }
 
-    /**
-     * Build Google Business Profile API URL
-     */
     static buildGoogleMetricsUrl(gmbId, dailyMetrics, dailyRange) {
         const baseUrl = `https://businessprofileperformance.googleapis.com/v1/locations/${gmbId}:fetchMultiDailyMetricsTimeSeries`;
         const queryParams = new URLSearchParams();
@@ -247,9 +223,6 @@ class metricUtils {
         return `${baseUrl}?${queryParams.toString()}`;
     }
 
-    /**
-     * Calculate total from time series data
-     */
     static calculateTotal(timeSeries) {
         if (!timeSeries || !Array.isArray(timeSeries)) {
             return 0;
@@ -261,9 +234,6 @@ class metricUtils {
         }, 0);
     }
 
-    /**
-     * Format metric name for display
-     */
     static formatMetricName(metricKey) {
         const names = {
             BUSINESS_IMPRESSIONS_DESKTOP_MAPS: "Desktop Maps Impressions",
@@ -282,9 +252,6 @@ class metricUtils {
         return names[metricKey] || metricKey;
     }
 
-    /**
-     * Fetch sub-account information
-     */
     static async fetchSubAccountInfo(subAccountId) {
         const org = await knex(DatabaseTableConstants.ORGANIZATION_TABLE)
             .select("name")

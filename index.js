@@ -9,7 +9,7 @@ const WebsocketUtils = require("/opt/nodejs/WebsocketUtils");
 const Utils = require("./utils");
 const metricUtils = require("./metricUtils");
 const { generateReportHTML } = require("./htmlGenerator");
-const htmlPdf = require("html-pdf-node");
+const pdf = require("pdf-creator-node");
 
 const s3 = new S3Client({});
 const BUCKET = layerS3BucketConstants.REPORT_BUCKET;
@@ -19,10 +19,11 @@ exports.handler = async (event) => {
     console.log(event);
 
     const messages = event.Records.map(r => JSON.parse(r.body));
-    const { report_id, organization_id, start_date, end_date, metrics, sub_accounts } = messages[0];
+    const { report_id, agency_id, start_date, end_date, metrics, sub_accounts } = messages[0];
 
     let reportStatus = "failed";
-    let pageCount = 0;
+
+    const trx = await knex.transaction();
 
     try {
         console.log("Starting report generation for report_id:", report_id);
@@ -37,7 +38,7 @@ exports.handler = async (event) => {
 
         const organization = await knex(DatabaseTableConstants.ORGANIZATION_TABLE)
             .select("name")
-            .where("id", organization_id)
+            .where("id", agency_id)
             .first();
 
         const metricsList = typeof metrics === "string" ? metrics.split(",").map(m => m.trim()) : metrics;
@@ -65,7 +66,7 @@ exports.handler = async (event) => {
                     subAccount,
                     startDate: start_date,
                     endDate: end_date,
-                    organizationId: organization_id,
+                    organizationId: agency_id,
                 });
 
                 metricData.push(result);
@@ -90,10 +91,16 @@ exports.handler = async (event) => {
         });
 
         console.log("Generating PDF...");
+        const document = {
+            html: html,
+            data: {},
+            type: "buffer",
+        };
+
         const options = {
             format: "A4",
-            printBackground: true,
-            margin: {
+            orientation: "portrait",
+            border: {
                 top: "20mm",
                 right: "15mm",
                 bottom: "20mm",
@@ -101,14 +108,36 @@ exports.handler = async (event) => {
             },
         };
 
-        const file = { content: html };
-        const pdfBuffer = await htmlPdf.generatePdf(file, options);
+        const pdfBuffer = await pdf.create(document, options);
+        console.log("PDF generated successfully");
 
-        // Calculate page count (approximate: 1 page ~= 3000 bytes for formatted content)
-        pageCount = Math.max(1, Math.ceil(pdfBuffer.length / 3000));
+        reportStatus = "completed";
+
+        await trx(DatabaseTableConstants.AGENCY_REPORT_TABLE)
+            .where("id", report_id)
+            .update({
+                status: reportStatus,
+                updated_at: knex.fn.now(),
+            });
+
+        console.log("Report status updated to completed");
+
+        const notificationData = {
+            id: report_id,
+            title: reportRecord.title,
+            status: reportStatus,
+        };
+
+        await Utils.createNotifications({
+            trx,
+            organizationId: agency_id,
+            notificationType: NotificationTypeConstants.NEW_REPORT,
+            data: notificationData,
+        });
+        console.log("Notification sent successfully");
 
         console.log("Uploading PDF to S3...");
-        const s3Key = `${organization_id}/${report_id}.pdf`;
+        const s3Key = `${agency_id}/${report_id}`;
         
         await s3.send(new PutObjectCommand({
             Bucket: BUCKET,
@@ -116,49 +145,22 @@ exports.handler = async (event) => {
             Body: pdfBuffer,
             ContentType: "application/pdf",
         }));
-
         console.log(`PDF uploaded to S3: ${BUCKET}/${s3Key}`);
 
-        reportStatus = "completed";
+        await trx.commit();
 
-        await knex(DatabaseTableConstants.AGENCY_REPORT_TABLE)
-            .where("id", report_id)
-            .update({
-                status: reportStatus,
-                page_count: pageCount,
-                updated_at: knex.fn.now(),
-            });
-
-        console.log("Report status updated to completed");
-
-        await knex.transaction(async (trx) => {
-            const notificationData = {
-                id: report_id,
-                title: reportRecord.title,
-                page_count: pageCount,
-                status: reportStatus,
-            };
-
-            await Utils.createNotifications({
-                trx,
-                organizationId: organization_id,
-                notificationType: NotificationTypeConstants.NEW_REPORT,
-                data: notificationData,
-            });
-
-            await WebsocketUtils.broadcastWebsocketMessageToOrganization(
-                organization_id,
-                WebSocketFlags.NEW_NOTIFICATION,
-                notificationData,
-                null,
-            );
-
-            console.log("Notification sent successfully");
-        });
+        await WebsocketUtils.broadcastWebsocketMessageToOrganization(
+            agency_id,
+            WebSocketFlags.NEW_NOTIFICATION,
+            notificationData,
+            null,
+        );
+        console.log("Websocket message sent successfully");
 
         console.log("Report generation completed successfully");
 
     } catch (error) {
+        await trx.rollback();
         console.error("Error generating report:", error);
         reportStatus = "failed";
 
@@ -178,19 +180,18 @@ exports.handler = async (event) => {
                 const notificationData = {
                     id: report_id,
                     title: reportRecord?.title || "Report",
-                    page_count: 0,
                     status: reportStatus,
                 };
 
                 await Utils.createNotifications({
                     trx,
-                    organizationId: organization_id,
+                    organizationId: agency_id,
                     notificationType: NotificationTypeConstants.NEW_REPORT,
                     data: notificationData,
                 });
 
                 await WebsocketUtils.broadcastWebsocketMessageToOrganization(
-                    organization_id,
+                 agency_id,
                     WebSocketFlags.NEW_NOTIFICATION,
                     notificationData,
                     null,
@@ -204,5 +205,5 @@ exports.handler = async (event) => {
         throw error;
     }
 
-    return { statusCode: 200, body: JSON.stringify({ message: "Report generated", report_id, status: reportStatus }) };
+    return { statusCode: 200, body: JSON.stringify({ message: "Report generated" }) };
 };

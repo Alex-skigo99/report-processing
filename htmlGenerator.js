@@ -1,10 +1,5 @@
 const metricUtils = require("./metricUtils");
 
-/**
- * Generate complete HTML for report
- * @param {Object} reportData - Report data including metrics and metadata
- * @returns {string} HTML string
- */
 function generateReportHTML(reportData) {
     const { title, startDate, endDate, metrics, organizationName } = reportData;
 
@@ -32,9 +27,6 @@ function generateReportHTML(reportData) {
     `.trim();
 }
 
-/**
- * Get CSS styles for the report
- */
 function getStyles() {
     return `
         * {
@@ -288,9 +280,6 @@ function getStyles() {
     `;
 }
 
-/**
- * Generate report header
- */
 function generateReportHeader(title, startDate, endDate, organizationName) {
     return `
         <div class="report-header">
@@ -306,9 +295,6 @@ function generateReportHeader(title, startDate, endDate, organizationName) {
     `;
 }
 
-/**
- * Generate table of contents
- */
 function generateTableOfContents(metrics) {
     const items = metrics.map((metric, index) => {
         const metricName = getMetricDisplayName(metric.type);
@@ -329,18 +315,12 @@ function generateTableOfContents(metrics) {
     `;
 }
 
-/**
- * Generate all metric sections
- */
 function generateMetricsSections(metrics) {
     return metrics.map((metric, index) => {
         return generateMetricSection(metric, index);
     }).join('\n');
 }
 
-/**
- * Generate a single metric section
- */
 function generateMetricSection(metric, index) {
     const metricName = getMetricDisplayName(metric.type);
     
