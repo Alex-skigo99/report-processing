@@ -120,20 +120,25 @@ class metricUtils {
         };
     }
 
-    static async processGooglePerformance({ subAccount, startDate, endDate, organizationId }, dailyMetric) {
+    static async processGooglePerformance({ subAccount, startDate, endDate }, dailyMetric) {
         const locations = await knex(DatabaseTableConstants.GMB_LOCATION_TABLE)
-            .select("business_name", "locality", "address_lines", "gmb_id", "account_id")
+            .select("business_name", "locality", "address_lines", "id")
             .whereIn("id", subAccount.locations)
             .orderBy("business_name");
+
+        const googleToken = await Utils.getGoogleToken(subAccount.sub_account, locations[0].id);
+
+        if (!googleToken) {
+            throw new Error("No valid Google access token found for the organization and GMB location.");
+        }
 
         const locationData = [];
 
         for (const location of locations) {
             try {
                 const timeSeries = await this.fetchGoogleMetricTimeSeries(
-                    location.account_id,
-                    organizationId,
-                    location.gmb_id,
+                    googleToken,
+                    location.id,
                     dailyMetric,
                     startDate,
                     endDate
@@ -169,7 +174,7 @@ class metricUtils {
         };
     }
 
-    static async fetchGoogleMetricTimeSeries(accountId, organizationId, gmbId, dailyMetric, startDate, endDate) {
+    static async fetchGoogleMetricTimeSeries(googleToken, gmbId, dailyMetric, startDate, endDate) {
         const start = new Date(startDate);
         const end = new Date(endDate);
 
@@ -188,15 +193,13 @@ class metricUtils {
 
         const url = this.buildGoogleMetricsUrl(gmbId, [dailyMetric], dailyRange);
         
-        const googleAccessToken = await FetchGoogleTokensUtils
-            .fetchValidGoogleAccessTokenViaAccountAndOrgId(accountId, organizationId);
-
         const response = await axios.get(url, {
             headers: {
-                Authorization: `Bearer ${googleAccessToken}`,
+                Authorization: `Bearer ${googleToken}`,
             },
         });
 
+        console.log(`Fetched Google metric time series for GMB ID ${gmbId}, Metric ${dailyMetric}:`, response.data);
         // Extract time series data
         if (response.data && response.data.multiDailyMetricTimeSeries && response.data.multiDailyMetricTimeSeries.length > 0) {
             return response.data.multiDailyMetricTimeSeries[0].timeSeries?.datedValues || [];

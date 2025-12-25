@@ -47,7 +47,7 @@ exports.handler = async (event) => {
         // Enrich sub_accounts with organization names
         const enrichedSubAccounts = await Promise.all(
             subAccountsList.map(async (subAccount) => {
-                const info = await metricUtils.fetchSubAccountInfo(subAccount.sub_account_id);
+                const info = await metricUtils.fetchSubAccountInfo(subAccount.sub_account);
                 return {
                     ...subAccount,
                     name: info.name,
@@ -66,7 +66,6 @@ exports.handler = async (event) => {
                     subAccount,
                     startDate: start_date,
                     endDate: end_date,
-                    organizationId: agency_id,
                 });
 
                 metricData.push(result);
@@ -153,7 +152,7 @@ exports.handler = async (event) => {
             agency_id,
             WebSocketFlags.NEW_NOTIFICATION,
             notificationData,
-            null,
+            {},
         );
         console.log("Websocket message sent successfully");
 
@@ -191,10 +190,10 @@ exports.handler = async (event) => {
                 });
 
                 await WebsocketUtils.broadcastWebsocketMessageToOrganization(
-                 agency_id,
+                    agency_id,
                     WebSocketFlags.NEW_NOTIFICATION,
                     notificationData,
-                    null,
+                    {},
                 );
             });
         } catch (notificationError) {
