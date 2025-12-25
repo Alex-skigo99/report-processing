@@ -69,6 +69,8 @@ exports.handler = async (event) => {
                 });
 
                 metricData.push(result);
+                console.log(`Processed metric ${metric} for sub-account ${subAccount.name}`);
+                console.log(result);
             }
 
             processedMetrics.push({
@@ -88,6 +90,9 @@ exports.handler = async (event) => {
             organizationName: organization?.name,
             metrics: processedMetrics,
         });
+
+        console.log("HTML generated successfully");
+        console.log(html);
 
         console.log("Generating PDF...");
         const document = {
