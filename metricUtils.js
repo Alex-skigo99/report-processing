@@ -31,12 +31,11 @@ class metricUtils {
         try {
             if (metricType === this.METRICS.GMB_REINSTATEMENT) {
                 return await this.processGMBReinstatement(params);
+
             } else if (metricType === this.METRICS.GMB_VERIFICATION) {
                 return await this.processGMBVerification(params);
-            } else if (metricType.startsWith("BUSINESS_IMPRESSIONS_") || 
-                       ["CALL_CLICKS", "WEBSITE_CLICKS", "BUSINESS_DIRECTION_REQUESTS", 
-                        "BUSINESS_CONVERSATIONS", "BUSINESS_BOOKINGS", "BUSINESS_FOOD_ORDERS",
-                        "BUSINESS_FOOD_MENU_CLICKS"].includes(metricType)) {
+
+            } else if (Object.values(this.METRICS.GOOGLE_PERFORMANCE).includes(metricType)) {
                 return await this.processGooglePerformance(params, metricType);
             }
 
