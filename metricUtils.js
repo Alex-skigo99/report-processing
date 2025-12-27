@@ -2,32 +2,14 @@ const knex = require("/opt/nodejs/db");
 const DatabaseTableConstants = require("/opt/nodejs/DatabaseTableConstants");
 const axios = require("axios");
 const Utils = require("./utils");
+const { METRICS, isGooglePerformanceMetric } = require("./metricConstants");
 
 class metricUtils {
     static get METRICS () {
-        return {
-            GMB_REINSTATEMENT: "gmb_reinstatement",
-            GMB_VERIFICATION: "gmb_verification",
-            REVIEW_REMOVAL: "review_removal",
-            GOOGLE_PERFORMANCE: {
-                DESKTOP_MAPS: "BUSINESS_IMPRESSIONS_DESKTOP_MAPS",
-                DESKTOP_SEARCH: "BUSINESS_IMPRESSIONS_DESKTOP_SEARCH",
-                MOBILE_MAPS: "BUSINESS_IMPRESSIONS_MOBILE_MAPS",
-                MOBILE_SEARCH: "BUSINESS_IMPRESSIONS_MOBILE_SEARCH",
-                BUSINESS_CONVERSATIONS: "BUSINESS_CONVERSATIONS",
-                BUSINESS_DIRECTION_REQUESTS: "BUSINESS_DIRECTION_REQUESTS",
-                CALL_CLICKS: "CALL_CLICKS",
-                WEBSITE_CLICKS: "WEBSITE_CLICKS",
-                BUSINESS_BOOKINGS: "BUSINESS_BOOKINGS",
-                BUSINESS_FOOD_ORDERS: "BUSINESS_FOOD_ORDERS",
-                BUSINESS_FOOD_MENU_CLICKS: "BUSINESS_FOOD_MENU_CLICKS",
-            },
-        };
+        return METRICS;
     }
 
-    static async processMetric(metricType, params) {
-        const metricKey = metricType.toUpperCase().replace(/\./g, "_");
-        
+    static async processMetric(metricType, params) {        
         try {
             if (metricType === this.METRICS.GMB_REINSTATEMENT) {
                 return await this.processGMBReinstatement(params);
@@ -35,7 +17,10 @@ class metricUtils {
             } else if (metricType === this.METRICS.GMB_VERIFICATION) {
                 return await this.processGMBVerification(params);
 
-            } else if (Object.values(this.METRICS.GOOGLE_PERFORMANCE).includes(metricType)) {
+            } else if (metricType === this.METRICS.REVIEW_REMOVAL) {
+                return await this.processReviewRemoval(params);
+
+            } else if (isGooglePerformanceMetric(metricType)) {
                 return await this.processGooglePerformance(params, metricType);
             }
 
@@ -111,6 +96,39 @@ class metricUtils {
 
         return {
             type: this.METRICS.GMB_VERIFICATION,
+            subAccountId: subAccount.sub_account,
+            subAccountName: subAccount.name,
+            submissions,
+            totalCount: submissions.length,
+            error: null,
+        };
+    }
+
+    static async processReviewRemoval({ subAccount, startDate, endDate }) {
+        const submissions = await knex({ r: DatabaseTableConstants.REVIEW_REMOVAL_REQUEST_TABLE })
+            .leftJoin(
+                { g: DatabaseTableConstants.GMB_LOCATION_TABLE },
+                "r.gmb_id",
+                "g.id"
+            )
+            .leftJoin(
+                { i: DatabaseTableConstants.INVOICE_STATUS_TABLE },
+                "r.invoice_status_id",
+                "i.id"
+            )
+            .select(
+                "g.business_name",
+                "r.review_link",
+                "r.updated_at",
+                "r.status",
+                "i.human_readable_status as invoice_status"
+            )
+            .where("r.organization_id", subAccount.sub_account)
+            .whereBetween("r.updated_at", [startDate, endDate])
+            .orderBy("r.updated_at", "desc");
+
+        return {
+            type: this.METRICS.REVIEW_REMOVAL,
             subAccountId: subAccount.sub_account,
             subAccountName: subAccount.name,
             submissions,

@@ -8,7 +8,8 @@ const WebSocketFlags = require("/opt/nodejs/WebsocketFlags");
 const WebsocketUtils = require("/opt/nodejs/WebsocketUtils");
 const Utils = require("./utils");
 const metricUtils = require("./metricUtils");
-const { generateReportHTML } = require("./htmlGenerator");
+const { generateReportHTML } = require("./htmlGenerator/index");
+const { METRICS, isGooglePerformanceMetric } = require("./metricConstants");
 const puppeteer = require("puppeteer-core");
 const chromium = require("@sparticuz/chromium");
 
@@ -56,28 +57,47 @@ exports.handler = async (event) => {
             })
         );
 
-        console.log("Processing metrics...");
-        const processedMetrics = [];
+        console.log("Processing metrics grouped by sub-account...");
+        
+        // Restructure data: Group by sub-account instead of by metric
+        const subAccountsData = [];
 
-        for (const metric of metricsList) {
-            const metricData = [];
+        for (const subAccount of enrichedSubAccounts) {
+            console.log(`Processing sub-account: ${subAccount.name}`);
+            
+            const subAccountMetrics = {
+                gmb_reinstatement: null,
+                gmb_verification: null,
+                review_removal: null,
+                performanceMetrics: []
+            };
 
-            for (const subAccount of enrichedSubAccounts) {
-                const result = await metricUtils.processMetric(metric, {
+            // Process each metric for this sub-account
+            for (const metricType of metricsList) {
+                const result = await metricUtils.processMetric(metricType, {
                     subAccount,
                     startDate: start_date,
                     endDate: end_date,
                 });
 
-                metricData.push(result);
-                console.log(`Processed metric ${metric} for sub-account ${subAccount.name}`);
-                console.log(result);
+                console.log(`Processed metric ${metricType} for sub-account ${subAccount.name}`);
+
+                // Organize metrics by type
+                if (metricType === METRICS.GMB_REINSTATEMENT) {
+                    subAccountMetrics.gmb_reinstatement = result;
+                } else if (metricType === METRICS.GMB_VERIFICATION) {
+                    subAccountMetrics.gmb_verification = result;
+                } else if (metricType === METRICS.REVIEW_REMOVAL) {
+                    subAccountMetrics.review_removal = result;
+                } else if (isGooglePerformanceMetric(metricType)) {
+                    subAccountMetrics.performanceMetrics.push(result);
+                }
             }
 
-            processedMetrics.push({
-                type: metric,
-                data: metricData,
-                error: null,
+            subAccountsData.push({
+                id: subAccount.sub_account,
+                name: subAccount.name,
+                metrics: subAccountMetrics
             });
         }
 
@@ -89,7 +109,7 @@ exports.handler = async (event) => {
             startDate: start_date,
             endDate: end_date,
             organizationName: organization?.name,
-            metrics: processedMetrics,
+            subAccounts: subAccountsData,
         });
 
         console.log("HTML generated successfully");
@@ -208,7 +228,7 @@ exports.handler = async (event) => {
         } catch (notificationError) {
             console.error("Error sending failure notification:", notificationError);
 
-            return { statusCode: 200, body: JSON.stringify({ message: "Error generating a report" }) };s
+            return { statusCode: 200, body: JSON.stringify({ message: "Error generating a report" }) };
         }
     }
 
