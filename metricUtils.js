@@ -202,9 +202,11 @@ class metricUtils {
         console.log(`Fetched Google metric time series for GMB ID ${gmbId}, Metric ${dailyMetric}:`, response.data);
         // Extract time series data
         if (response.data && response.data.multiDailyMetricTimeSeries && response.data.multiDailyMetricTimeSeries.length > 0) {
-            const timeSeries = response.data.multiDailyMetricTimeSeries[0].dailyMetricTimeSeries || [];
-            console.log("Time series data:", timeSeries);
-            return timeSeries;
+            const datedValuesForMetric = response.data.multiDailyMetricTimeSeries[0].dailyMetricTimeSeries.find((series) =>
+                series.dailyMetric === dailyMetric
+            )?.timeSeries?.datedValues || [];
+            console.log("Dated values data:", datedValuesForMetric);
+            return datedValuesForMetric;
         }
 
         return [];

@@ -9,7 +9,8 @@ const WebsocketUtils = require("/opt/nodejs/WebsocketUtils");
 const Utils = require("./utils");
 const metricUtils = require("./metricUtils");
 const { generateReportHTML } = require("./htmlGenerator");
-const pdf = require("pdf-creator-node");
+const puppeteer = require("puppeteer-core");
+const chromium = require("@sparticuz/chromium");
 
 const s3 = new S3Client({});
 const BUCKET = layerS3BucketConstants.REPORT_BUCKET;
@@ -95,24 +96,27 @@ exports.handler = async (event) => {
         console.log(html);
 
         console.log("Generating PDF...");
-        const document = {
-            html: html,
-            data: {},
-            type: "buffer",
-        };
+        const browser = await puppeteer.launch({
+            args: chromium.args,
+            defaultViewport: chromium.defaultViewport,
+            executablePath: await chromium.executablePath(),
+            headless: chromium.headless,
+        });
 
-        const options = {
+        const page = await browser.newPage();
+        await page.setContent(html, { waitUntil: "networkidle0" });
+        const pdfBuffer = await page.pdf({
             format: "A4",
-            orientation: "portrait",
-            border: {
+            printBackground: true,
+            margin: {
                 top: "20mm",
                 right: "15mm",
                 bottom: "20mm",
                 left: "15mm",
             },
-        };
+        });
 
-        const pdfBuffer = await pdf.create(document, options);
+        await browser.close();
         console.log("PDF generated successfully");
 
         reportStatus = "completed";
@@ -204,10 +208,9 @@ exports.handler = async (event) => {
             });
         } catch (notificationError) {
             console.error("Error sending failure notification:", notificationError);
-        }
 
-        // Re-throw error for Lambda to mark it as failed
-        throw error;
+            return { statusCode: 200, body: JSON.stringify({ message: "Error generating a report" }) };s
+        }
     }
 
     return { statusCode: 200, body: JSON.stringify({ message: "Report generated" }) };
