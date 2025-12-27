@@ -137,3 +137,9 @@ dist
 
 *.zip
 .DS_Store
+
+pdf/
+html/
+*.docx
+*.xlsx
+*.pptx
