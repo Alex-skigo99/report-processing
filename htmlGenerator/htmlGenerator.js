@@ -171,41 +171,22 @@ function generatePerformanceMetricsSection(performanceMetrics) {
         });
     });
 
-    // Generate summary table to all metrics
-    let summaryTablesHtml = '';
-    
-    // Combine all metrics and locations into a single table structure
-    const allMetricsData = [];
-    performanceMetrics.forEach(metric => {
-        if (!metric.locations || metric.locations.length === 0) return;
-        
-        metric.locations.forEach(location => {
-            allMetricsData.push({
-                businessName: location.businessName,
-                locality: location.locality,
-                address: location.address,
-                metricName: metric.metricName,
-                metricType: metric.type,
-                total: location.total,
-                error: location.error
-            });
-        });
-    });
-    
-    if (allMetricsData.length > 0) {
-        summaryTablesHtml = `
-            <div class="metric-section">
-                <h4 class="section-title">Metrics Summary - All Locations</h4>
-                ${generateLocationSummaryTable(allMetricsData, 'All Metrics')}
-            </div>
-        `;
-    }
-
     // Generate HTML for each location
     let locationsHtml = '';
     
     // Loop through each location
     locationMap.forEach((locationData, locationKey) => {
+        // Create metrics summary table for this location only
+        const locationMetricsData = locationData.metrics.map(metric => ({
+            businessName: locationData.businessName,
+            locality: locationData.locality,
+            address: locationData.address,
+            metricName: metric.metricName,
+            metricType: metric.type,
+            total: metric.total,
+            error: metric.error
+        }));
+        
         locationsHtml += `
             <div class="location-section">
                 <h3 class="location-title">
@@ -213,6 +194,11 @@ function generatePerformanceMetricsSection(performanceMetrics) {
                     ${locationData.locality ? ` - ${escapeHtml(locationData.locality)}` : ''}
                 </h3>
                 ${locationData.address ? `<p style="color: #6b7280; margin-bottom: 15px;">${escapeHtml(locationData.address)}</p>` : ''}
+                
+                <div class="metric-section">
+                    <h4 class="section-title">Metrics Summary Table</h4>
+                    ${generateLocationSummaryTable(locationMetricsData, 'Metrics')}
+                </div>
                 
                 ${generateLocationMetrics(locationData.metrics)}
             </div>
@@ -222,7 +208,6 @@ function generatePerformanceMetricsSection(performanceMetrics) {
     return `
         <div class="metric-section">
             <h3 class="section-title">Google Performance Metrics by Location</h3>
-            ${summaryTablesHtml}
             ${locationsHtml}
         </div>
     `;
@@ -231,16 +216,14 @@ function generatePerformanceMetricsSection(performanceMetrics) {
 /**
  * Generate all metrics for a single location
  * Loop through each metric and create a graph
+ * Skip graphs if metric data is empty or has error
  */
 function generateLocationMetrics(metrics) {
     // Loop through each metric for this location
     return metrics.map(metric => {
-        if (metric.error) {
-            return `
-                <div class="error-message">
-                    ${escapeHtml(metric.metricName)}: ${escapeHtml(metric.error)}
-                </div>
-            `;
+        // Skip if metric has error or no time series data
+        if (metric.error || !metric.timeSeries || metric.timeSeries.length === 0) {
+            return '';
         }
         
         return generateLocationChart(
@@ -248,7 +231,7 @@ function generateLocationMetrics(metrics) {
             metric.metricName,
             metric.type
         );
-    }).join('\n');
+    }).filter(html => html !== '').join('\n');
 }
 
 module.exports = {

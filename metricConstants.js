@@ -27,7 +27,7 @@ const METRICS = {
 const METRIC_DISPLAY_NAMES = {
     [METRICS.GMB_REINSTATEMENT]: "GMB Reinstatement Submissions",
     [METRICS.GMB_VERIFICATION]: "GMB Verification Submissions",
-    [METRICS.REVIEW_REMOVAL]: "Review Removal Submissions",
+    [METRICS.REVIEW_REMOVAL]: "Review Removal Requests",
     [METRICS.GOOGLE_PERFORMANCE.DESKTOP_MAPS]: "Desktop Maps Impressions",
     [METRICS.GOOGLE_PERFORMANCE.DESKTOP_SEARCH]: "Desktop Search Impressions",
     [METRICS.GOOGLE_PERFORMANCE.MOBILE_MAPS]: "Mobile Maps Impressions",
