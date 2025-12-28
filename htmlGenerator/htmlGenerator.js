@@ -157,6 +157,7 @@ function generatePerformanceMetricsSection(performanceMetrics) {
                     businessName: location.businessName,
                     locality: location.locality,
                     address: location.address,
+                    verificationStatus: location.verificationStatus,
                     metrics: []
                 });
             }
@@ -175,22 +176,31 @@ function generatePerformanceMetricsSection(performanceMetrics) {
     let locationsHtml = '';
     
     // Loop through each location
-    locationMap.forEach((locationData, locationKey) => {
+    locationMap.forEach((locationData) => {
         // Create metrics summary table for this location only
-        const locationMetricsData = locationData.metrics.map(metric => ({
-            businessName: locationData.businessName,
-            locality: locationData.locality,
-            address: locationData.address,
-            metricName: metric.metricName,
-            metricType: metric.type,
-            total: metric.total,
-            error: metric.error
-        }));
+        const locationMetricsData = locationData.metrics.map(metric => {
+            // Calculate total from timeSeries if available and total is 0 or missing
+            let total = metric.total;
+            if ((!total || total === 0) && metric.timeSeries && metric.timeSeries.length > 0) {
+                total = metric.timeSeries.reduce((sum, point) => sum + (point.value || 0), 0);
+            }
+            
+            return {
+                businessName: locationData.businessName,
+                locality: locationData.locality,
+                address: locationData.address,
+                metricName: metric.metricName,
+                metricType: metric.type,
+                total: total,
+                error: metric.error
+            };
+        });
         
         locationsHtml += `
             <div class="location-section">
                 <h3 class="location-title">
                     ${escapeHtml(locationData.businessName)}
+                    ${locationData.verificationStatus ? ` <span style="color: #6b7280; font-size: 0.9em; font-weight: normal;">• ${escapeHtml(locationData.verificationStatus)}</span>` : ''}
                     ${locationData.locality ? ` - ${escapeHtml(locationData.locality)}` : ''}
                 </h3>
                 ${locationData.address ? `<p style="color: #6b7280; margin-bottom: 15px;">${escapeHtml(locationData.address)}</p>` : ''}

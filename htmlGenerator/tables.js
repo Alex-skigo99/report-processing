@@ -129,16 +129,9 @@ function generateLocationSummaryTable(data, metricName) {
     const isCombinedMetrics = data.some(item => item.metricName && item.metricType);
 
     const rows = data.map(item => {
-        const businessName = escapeHtml(item.businessName || 'N/A');
-        const locality = escapeHtml(item.locality || 'N/A');
-        const address = escapeHtml(item.address || 'N/A');
-        
         if (item.error) {
             return `
                 <tr>
-                    <td>${businessName}</td>
-                    <td>${locality}</td>
-                    <td>${address}</td>
                     ${isCombinedMetrics ? `<td>${escapeHtml(item.metricName || 'N/A')}</td>` : ''}
                     <td><span class="error-message" style="display: inline-block; padding: 4px 8px;">${escapeHtml(item.error)}</span></td>
                 </tr>
@@ -147,9 +140,6 @@ function generateLocationSummaryTable(data, metricName) {
         
         return `
             <tr>
-                <td>${businessName}</td>
-                <td>${locality}</td>
-                <td>${address}</td>
                 ${isCombinedMetrics ? `<td>${escapeHtml(item.metricName || 'N/A')}</td>` : ''}
                 <td style="text-align: right; font-weight: 600;">${formatNumber(item.total || 0)}</td>
             </tr>
@@ -160,29 +150,20 @@ function generateLocationSummaryTable(data, metricName) {
 
     const tableHeader = isCombinedMetrics ?
         `<tr>
-            <th>Business Name</th>
-            <th>Locality</th>
-            <th>Address</th>
             <th>Metric</th>
             <th style="text-align: right;">Total</th>
         </tr>` :
         `<tr>
-            <th>Business Name</th>
-            <th>Locality</th>
-            <th>Address</th>
             <th style="text-align: right;">Total</th>
         </tr>`;
 
     return `
-        <div class="summary-box">
-            <p class="summary-text">Total ${escapeHtml(metricName)}: ${formatNumber(totalValue)}</p>
-        </div>
-        <table>
+        <table style="width: 50%; border-collapse: collapse;">
             <thead>
                 ${tableHeader}
             </thead>
             <tbody>
-                ${rows}
+                ${rows.split('<tr>').map((row, i) => i === 0 ? row : `<tr style="height: 30px;">${row}`).join('')}
             </tbody>
         </table>
     `;

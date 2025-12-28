@@ -2,22 +2,18 @@ const knex = require("/opt/nodejs/db");
 const DatabaseTableConstants = require("/opt/nodejs/DatabaseTableConstants");
 const axios = require("axios");
 const Utils = require("./utils");
-const { METRICS, isGooglePerformanceMetric } = require("./metricConstants");
+const { METRICS, isGooglePerformanceMetric, getMetricDisplayName } = require("./metricConstants");
 
 class metricUtils {
-    static get METRICS () {
-        return METRICS;
-    }
-
     static async processMetric(metricType, params) {        
         try {
-            if (metricType === this.METRICS.GMB_REINSTATEMENT) {
+            if (metricType === METRICS.GMB_REINSTATEMENT) {
                 return await this.processGMBReinstatement(params);
 
-            } else if (metricType === this.METRICS.GMB_VERIFICATION) {
+            } else if (metricType === METRICS.GMB_VERIFICATION) {
                 return await this.processGMBVerification(params);
 
-            } else if (metricType === this.METRICS.REVIEW_REMOVAL) {
+            } else if (metricType === METRICS.REVIEW_REMOVAL) {
                 return await this.processReviewRemoval(params);
 
             } else if (isGooglePerformanceMetric(metricType)) {
@@ -63,7 +59,7 @@ class metricUtils {
             .orderBy("r.updated_at", "desc");
 
         return {
-            type: this.METRICS.GMB_REINSTATEMENT,
+            type: METRICS.GMB_REINSTATEMENT,
             subAccountId: subAccount.sub_account,
             subAccountName: subAccount.name,
             submissions,
@@ -95,7 +91,7 @@ class metricUtils {
             .orderBy("n.updated_at", "desc");
 
         return {
-            type: this.METRICS.GMB_VERIFICATION,
+            type: METRICS.GMB_VERIFICATION,
             subAccountId: subAccount.sub_account,
             subAccountName: subAccount.name,
             submissions,
@@ -128,7 +124,7 @@ class metricUtils {
             .orderBy("r.updated_at", "desc");
 
         return {
-            type: this.METRICS.REVIEW_REMOVAL,
+            type: METRICS.REVIEW_REMOVAL,
             subAccountId: subAccount.sub_account,
             subAccountName: subAccount.name,
             submissions,
@@ -139,7 +135,7 @@ class metricUtils {
 
     static async processGooglePerformance({ subAccount, startDate, endDate }, dailyMetric) {
         const locations = await knex(DatabaseTableConstants.GMB_LOCATION_TABLE)
-            .select("business_name", "locality", "address_lines", "id")
+            .select("business_name", "locality", "address_lines", "id", "verification_status")
             .whereIn("id", subAccount.locations)
             .orderBy("business_name");
 
@@ -165,6 +161,7 @@ class metricUtils {
                     businessName: location.business_name,
                     locality: location.locality,
                     address: location.address_lines ? location.address_lines.join(", ") : "",
+                    verificationStatus: location.verification_status,
                     timeSeries,
                     total: this.calculateTotal(timeSeries),
                 });
@@ -173,6 +170,7 @@ class metricUtils {
                 locationData.push({
                     businessName: location.business_name,
                     locality: location.locality,
+                    verificationStatus: location.verification_status,
                     address: location.address_lines ? location.address_lines.join(", ") : "",
                     error: error.message,
                     timeSeries: null,
@@ -185,7 +183,7 @@ class metricUtils {
             type: dailyMetric,
             subAccountId: subAccount.sub_account_id,
             subAccountName: subAccount.name,
-            metricName: this.formatMetricName(dailyMetric),
+            metricName: getMetricDisplayName(dailyMetric),
             locations: locationData,
             error: null,
         };
@@ -256,24 +254,6 @@ class metricUtils {
             const value = parseInt(item.value, 10);
             return sum + (isNaN(value) ? 0 : value);
         }, 0);
-    }
-
-    static formatMetricName(metricKey) {
-        const names = {
-            BUSINESS_IMPRESSIONS_DESKTOP_MAPS: "Desktop Maps Impressions",
-            BUSINESS_IMPRESSIONS_DESKTOP_SEARCH: "Desktop Search Impressions",
-            BUSINESS_IMPRESSIONS_MOBILE_MAPS: "Mobile Maps Impressions",
-            BUSINESS_IMPRESSIONS_MOBILE_SEARCH: "Mobile Search Impressions",
-            CALL_CLICKS: "Call Clicks",
-            WEBSITE_CLICKS: "Website Clicks",
-            BUSINESS_DIRECTION_REQUESTS: "Direction Requests",
-            BUSINESS_CONVERSATIONS: "Conversations",
-            BUSINESS_BOOKINGS: "Bookings",
-            BUSINESS_FOOD_ORDERS: "Food Orders",
-            BUSINESS_FOOD_MENU_CLICKS: "Menu Clicks",
-        };
-
-        return names[metricKey] || metricKey;
     }
 
     static async fetchSubAccountInfo(subAccountId) {
