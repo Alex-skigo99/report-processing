@@ -84,7 +84,7 @@ function generateSubAccountChapter(subAccount, index) {
     const { name, metrics } = subAccount;
 
     return `
-        <div class="sub-account-chapter" id="sub-account-${index}">
+        <div class="sub-account-chapter page-break" id="sub-account-${index}">
             <h2 class="chapter-title">${escapeHtml(name)}</h2>
             
             ${generateMetricTables(metrics)}
@@ -223,17 +223,14 @@ function generatePerformanceMetricsSection(performanceMetrics) {
     `;
 }
 
-/**
- * Generate all metrics for a single location
- * Loop through each metric and create a graph
- * Skip graphs if metric data is empty or has error
- */
 function generateLocationMetrics(metrics) {
     // Loop through each metric for this location
     return metrics.map(metric => {
+
+        console.log("Generating chart for metric:", metric); // Debug log
         // Skip if metric has error or no time series data
         if (metric.error || !metric.timeSeries || metric.timeSeries.length === 0) {
-            return '';
+            return "";
         }
         
         return generateLocationChart(
@@ -241,7 +238,7 @@ function generateLocationMetrics(metrics) {
             metric.metricName,
             metric.type
         );
-    }).filter(html => html !== '').join('\n');
+    }).filter(html => html !== "").join('\n');
 }
 
 module.exports = {

@@ -54,7 +54,6 @@ function getStyles() {
             padding: 25px;
             border-radius: 8px;
             margin-bottom: 40px;
-            page-break-after: always;
         }
         
         .toc-title {
@@ -114,6 +113,7 @@ function getStyles() {
             padding: 10px;
             background: #eff6ff;
             border-left: 4px solid #2563eb;
+            page-break-after: avoid;
         }
 
         .location-section {

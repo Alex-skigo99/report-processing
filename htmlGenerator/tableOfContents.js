@@ -1,8 +1,5 @@
 const { escapeHtml } = require('./helpers');
 
-/**
- * Generate table of contents
- */
 function generateTableOfContents(subAccounts) {
     const items = subAccounts.map((subAccount, index) => {
         return `
@@ -14,7 +11,7 @@ function generateTableOfContents(subAccounts) {
 
     return `
         <div class="table-of-contents">
-            <h2 class="toc-title">Table of Contents</h2>
+            <h2 class="toc-title">Table of Contents - Sub Accounts</h2>
             <ul class="toc-list">
                 ${items}
             </ul>

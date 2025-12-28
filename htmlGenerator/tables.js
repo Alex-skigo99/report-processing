@@ -125,28 +125,23 @@ function generateLocationSummaryTable(data, metricName) {
         return '<p class="no-data">No data found.</p>';
     }
 
-    // Determine if this is the new combined metrics format or the old single-metric format
-    const isCombinedMetrics = data.some(item => item.metricName && item.metricType);
-
     const rows = data.map(item => {
         if (item.error) {
             return `
                 <tr>
-                    ${isCombinedMetrics ? `<td>${escapeHtml(item.metricName || 'N/A')}</td>` : ''}
-                    <td><span class="error-message" style="display: inline-block; padding: 4px 8px;">${escapeHtml(item.error)}</span></td>
+                    <td>${escapeHtml(item.metricName || 'N/A')}</td>
+                    <td><span class="error-message" style="display: inline-block; padding: 4px 8px;">${escapeHtml("Loading failed")}</span></td>
                 </tr>
             `;
         }
         
         return `
             <tr>
-                ${isCombinedMetrics ? `<td>${escapeHtml(item.metricName || 'N/A')}</td>` : ''}
+                <td>${escapeHtml(item.metricName || 'N/A')}</td>
                 <td style="text-align: right; font-weight: 600;">${formatNumber(item.total || 0)}</td>
             </tr>
         `;
     }).join('');
-
-    const totalValue = data.reduce((sum, item) => sum + (item.total || 0), 0);
 
     const tableHeader = isCombinedMetrics ?
         `<tr>
@@ -158,12 +153,12 @@ function generateLocationSummaryTable(data, metricName) {
         </tr>`;
 
     return `
-        <table style="width: 50%; border-collapse: collapse;">
+        <table style="border-collapse: collapse;">
             <thead>
                 ${tableHeader}
             </thead>
             <tbody>
-                ${rows.split('<tr>').map((row, i) => i === 0 ? row : `<tr style="height: 30px;">${row}`).join('')}
+                ${rows.split('<tr>').map((row, i) => i === 0 ? row : `<tr style="height: 24px;">${row}`).join('')}
             </tbody>
         </table>
     `;
