@@ -118,7 +118,6 @@ function generateReviewRemovalTable(data) {
 
 /**
  * Generate location summary table for performance metrics
- * Handles both single metric (array of locations) and all metrics (array of metric data objects)
  */
 function generateLocationSummaryTable(data, metricName) {
     if (!data || data.length === 0) {
@@ -130,7 +129,7 @@ function generateLocationSummaryTable(data, metricName) {
             return `
                 <tr>
                     <td>${escapeHtml(item.metricName || 'N/A')}</td>
-                    <td><span class="error-message" style="display: inline-block; padding: 4px 8px;">${escapeHtml("Loading failed")}</span></td>
+                    <td><span class="error-text" style="display: inline-block;">${escapeHtml("Loading failed")}</span></td>
                 </tr>
             `;
         }
@@ -143,12 +142,9 @@ function generateLocationSummaryTable(data, metricName) {
         `;
     }).join('');
 
-    const tableHeader = isCombinedMetrics ?
+    const tableHeader =
         `<tr>
             <th>Metric</th>
-            <th style="text-align: right;">Total</th>
-        </tr>` :
-        `<tr>
             <th style="text-align: right;">Total</th>
         </tr>`;
 

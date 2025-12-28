@@ -121,7 +121,6 @@ function getStyles() {
             padding: 20px;
             background: #f9fafb;
             border-radius: 8px;
-            page-break-inside: avoid;
         }
 
         .location-title {
@@ -168,7 +167,7 @@ function getStyles() {
         }
         
         td {
-            padding: 12px;
+            padding: 12px 8px;
             border-bottom: 1px solid #e5e7eb;
             font-size: 13px;
         }
@@ -225,6 +224,12 @@ function getStyles() {
             border-radius: 6px;
             border-left: 4px solid #dc2626;
             margin-bottom: 15px;
+        }
+
+        .error-text {
+            font-size: 13px;
+            font-weight: 500;
+            color: #991b1b;
         }
         
         .status-badge {

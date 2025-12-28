@@ -8,7 +8,7 @@ const {
     generateLocationSummaryTable,
 } = require('./tables');
 const { generateLocationChart } = require('./charts');
-const { escapeHtml } = require('./helpers');
+const { escapeHtml, formatVerificationStatus } = require('./helpers');
 const { METRICS, getMetricDisplayName } = require('../metricConstants');
 
 /**
@@ -200,7 +200,7 @@ function generatePerformanceMetricsSection(performanceMetrics) {
             <div class="location-section">
                 <h3 class="location-title">
                     ${escapeHtml(locationData.businessName)}
-                    ${locationData.verificationStatus ? ` <span style="color: #6b7280; font-size: 0.9em; font-weight: normal;">• ${escapeHtml(locationData.verificationStatus)}</span>` : ''}
+                    ${locationData.verificationStatus ? (() => { const status = formatVerificationStatus(locationData.verificationStatus); return ` <span style="color: ${status.color}; font-size: 0.9em; font-weight: normal;">• ${status.text}</span>`; })() : ''}
                     ${locationData.locality ? ` - ${escapeHtml(locationData.locality)}` : ''}
                 </h3>
                 ${locationData.address ? `<p style="color: #6b7280; margin-bottom: 15px;">${escapeHtml(locationData.address)}</p>` : ''}
@@ -229,7 +229,7 @@ function generateLocationMetrics(metrics) {
 
         console.log("Generating chart for metric:", metric); // Debug log
         // Skip if metric has error or no time series data
-        if (metric.error || !metric.timeSeries || metric.timeSeries.length === 0) {
+        if (metric.total === 0 || metric.error) {
             return "";
         }
         

@@ -61,10 +61,26 @@ function getStatusClass(status) {
     return 'status-not-started';
 }
 
+function formatVerificationStatus(status) {
+    if (!status) return { text: '', color: '#6b7280' };
+    
+    const colorMap = {
+        'HARD_SUSPENDED': '#ef4444',
+        'SOFT_SUSPENDED': '#eab308',
+        'VERIFIED': '#22c55e'
+    };
+    
+    const readableText = status.replace(/_/g, ' ');
+    const color = colorMap[status] || '#6b7280';
+    
+    return { text: readableText, color };
+}
+
 module.exports = {
     escapeHtml,
     formatDate,
     formatChartDate,
     formatNumber,
     getStatusClass,
+    formatVerificationStatus,
 };
