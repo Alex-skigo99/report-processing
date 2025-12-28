@@ -8,10 +8,11 @@ const WebSocketFlags = require("/opt/nodejs/WebsocketFlags");
 const WebsocketUtils = require("/opt/nodejs/WebsocketUtils");
 const Utils = require("./utils");
 const metricUtils = require("./metricUtils");
-const { generateReportHTML } = require("./htmlGenerator/index");
+const { generateReportHTML } = require("./htmlGenerator/htmlGenerator");
 const { METRICS, isGooglePerformanceMetric } = require("./metricConstants");
-const puppeteer = require("puppeteer-core");
-const chromium = require("@sparticuz/chromium");
+const { REPORT_STATUS } = require("./constants");
+// const puppeteer = require("puppeteer-core");
+// const chromium = require("@sparticuz/chromium");
 
 const s3 = new S3Client({});
 const BUCKET = layerS3BucketConstants.REPORT_BUCKET;
@@ -23,7 +24,7 @@ exports.handler = async (event) => {
     const messages = event.Records.map(r => JSON.parse(r.body));
     const { report_id, agency_id, start_date, end_date, metrics, sub_accounts } = messages[0];
 
-    let reportStatus = "failed";
+    let reportStatus = REPORT_STATUS.FAILED;
 
     const trx = await knex.transaction();
 
@@ -115,30 +116,30 @@ exports.handler = async (event) => {
         console.log("HTML generated successfully");
         console.log(html);
 
-        console.log("Generating PDF...");
-        const browser = await puppeteer.launch({
-            args: chromium.args,
-            executablePath: await chromium.executablePath(),
-            headless: chromium.headless,
-        });
+        // console.log("Generating PDF...");
+        // const browser = await puppeteer.launch({
+        //     args: chromium.args,
+        //     executablePath: await chromium.executablePath(),
+        //     headless: chromium.headless,
+        // });
 
-        const page = await browser.newPage();
-        await page.setContent(html, { waitUntil: "networkidle0" });
-        const pdfBuffer = await page.pdf({
-            format: "A4",
-            printBackground: true,
-            margin: {
-                top: "20mm",
-                right: "15mm",
-                bottom: "20mm",
-                left: "15mm",
-            },
-        });
+        // const page = await browser.newPage();
+        // await page.setContent(html, { waitUntil: "networkidle0" });
+        // const pdfBuffer = await page.pdf({
+        //     format: "A4",
+        //     printBackground: true,
+        //     margin: {
+        //         top: "20mm",
+        //         right: "15mm",
+        //         bottom: "20mm",
+        //         left: "15mm",
+        //     },
+        // });
 
-        await browser.close();
-        console.log("PDF generated successfully");
+        // await browser.close();
+        // console.log("PDF generated successfully");
 
-        reportStatus = "completed";
+        reportStatus = REPORT_STATUS.COMPLETED;
 
         await trx(DatabaseTableConstants.AGENCY_REPORT_TABLE)
             .where("id", report_id)
@@ -163,16 +164,27 @@ exports.handler = async (event) => {
         });
         console.log("Notification sent successfully");
 
-        console.log("Uploading PDF to S3...");
-        const s3Key = `${agency_id}/${report_id}`;
+        // console.log("Uploading PDF to S3...");
+        // const s3Key = `${agency_id}/${report_id}`;
+        
+        // await s3.send(new PutObjectCommand({
+        //     Bucket: BUCKET,
+        //     Key: s3Key,
+        //     Body: pdfBuffer,
+        //     ContentType: "application/pdf",
+        // }));
+        // console.log(`PDF uploaded to S3: ${BUCKET}/${s3Key}`);
+
+        console.log("Uploading HTML to S3...");
+        const s3HtmlKey = `${agency_id}/${report_id}`;
         
         await s3.send(new PutObjectCommand({
             Bucket: BUCKET,
-            Key: s3Key,
-            Body: pdfBuffer,
-            ContentType: "application/pdf",
+            Key: s3HtmlKey,
+            Body: html,
+            ContentType: "text/html",
         }));
-        console.log(`PDF uploaded to S3: ${BUCKET}/${s3Key}`);
+        console.log(`HTML uploaded to S3: ${BUCKET}/${s3HtmlKey}`);
 
         await trx.commit();
 
@@ -185,25 +197,22 @@ exports.handler = async (event) => {
         console.log("Websocket message sent successfully");
 
         console.log("Report generation completed successfully");
+        return { statusCode: 200, body: JSON.stringify({ message: "Report generated successfully" }) };
 
     } catch (error) {
         await trx.rollback();
         console.error("Error generating report:", error);
-        reportStatus = "failed";
+        reportStatus = REPORT_STATUS.FAILED;
 
-        await knex(DatabaseTableConstants.AGENCY_REPORT_TABLE)
+        const [reportRecord] =await knex(DatabaseTableConstants.AGENCY_REPORT_TABLE)
             .where("id", report_id)
             .update({
                 status: reportStatus,
                 updated_at: knex.fn.now(),
-            });
+            }, ["id", "title"]);
 
         try {
             await knex.transaction(async (trx) => {
-                const reportRecord = await knex(DatabaseTableConstants.AGENCY_REPORT_TABLE)
-                    .where("id", report_id)
-                    .first();
-
                 const notificationData = {
                     id: report_id,
                     title: reportRecord?.title || "Report",
@@ -224,13 +233,11 @@ exports.handler = async (event) => {
                     {},
                 );
                 console.log("Failure websocket message sent successfully");
+                return { statusCode: 200, body: JSON.stringify({ message: "Error generating a report" }) };
             });
         } catch (notificationError) {
             console.error("Error sending failure notification:", notificationError);
-
-            return { statusCode: 200, body: JSON.stringify({ message: "Error generating a report" }) };
+            return { statusCode: 200, body: JSON.stringify({ message: "Error generating a report and sending notification" }) };
         }
     }
-
-    return { statusCode: 200, body: JSON.stringify({ message: "Report generated" }) };
 };
