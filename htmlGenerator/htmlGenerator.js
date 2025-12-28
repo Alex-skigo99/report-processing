@@ -171,18 +171,35 @@ function generatePerformanceMetricsSection(performanceMetrics) {
         });
     });
 
-    // Generate location summary tables for each metric
+    // Generate summary table to all metrics
     let summaryTablesHtml = '';
+    
+    // Combine all metrics and locations into a single table structure
+    const allMetricsData = [];
     performanceMetrics.forEach(metric => {
         if (!metric.locations || metric.locations.length === 0) return;
         
-        summaryTablesHtml += `
+        metric.locations.forEach(location => {
+            allMetricsData.push({
+                businessName: location.businessName,
+                locality: location.locality,
+                address: location.address,
+                metricName: metric.metricName,
+                metricType: metric.type,
+                total: location.total,
+                error: location.error
+            });
+        });
+    });
+    
+    if (allMetricsData.length > 0) {
+        summaryTablesHtml = `
             <div class="metric-section">
-                <h4 class="section-title">${getMetricDisplayName(metric.type)} - Location Summary</h4>
-                ${generateLocationSummaryTable(metric.locations, metric.metricName)}
+                <h4 class="section-title">Metrics Summary - All Locations</h4>
+                ${generateLocationSummaryTable(allMetricsData, 'All Metrics')}
             </div>
         `;
-    });
+    }
 
     // Generate HTML for each location
     let locationsHtml = '';

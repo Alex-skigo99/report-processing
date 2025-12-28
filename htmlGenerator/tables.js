@@ -118,35 +118,60 @@ function generateReviewRemovalTable(data) {
 
 /**
  * Generate location summary table for performance metrics
+ * Handles both single metric (array of locations) and all metrics (array of metric data objects)
  */
-function generateLocationSummaryTable(locations, metricName) {
-    if (!locations || locations.length === 0) {
-        return '<p class="no-data">No locations found for this metric.</p>';
+function generateLocationSummaryTable(data, metricName) {
+    if (!data || data.length === 0) {
+        return '<p class="no-data">No data found.</p>';
     }
 
-    const rows = locations.map(location => {
-        if (location.error) {
+    // Determine if this is the new combined metrics format or the old single-metric format
+    const isCombinedMetrics = data.some(item => item.metricName && item.metricType);
+
+    const rows = data.map(item => {
+        const businessName = escapeHtml(item.businessName || 'N/A');
+        const locality = escapeHtml(item.locality || 'N/A');
+        const address = escapeHtml(item.address || 'N/A');
+        
+        if (item.error) {
             return `
                 <tr>
-                    <td>${escapeHtml(location.businessName || 'N/A')}</td>
-                    <td>${escapeHtml(location.locality || 'N/A')}</td>
-                    <td>${escapeHtml(location.address || 'N/A')}</td>
-                    <td colspan="1"><span class="error-message" style="display: inline-block; padding: 4px 8px;">${escapeHtml(location.error)}</span></td>
+                    <td>${businessName}</td>
+                    <td>${locality}</td>
+                    <td>${address}</td>
+                    ${isCombinedMetrics ? `<td>${escapeHtml(item.metricName || 'N/A')}</td>` : ''}
+                    <td><span class="error-message" style="display: inline-block; padding: 4px 8px;">${escapeHtml(item.error)}</span></td>
                 </tr>
             `;
         }
         
         return `
             <tr>
-                <td>${escapeHtml(location.businessName || 'N/A')}</td>
-                <td>${escapeHtml(location.locality || 'N/A')}</td>
-                <td>${escapeHtml(location.address || 'N/A')}</td>
-                <td style="text-align: right; font-weight: 600;">${formatNumber(location.total || 0)}</td>
+                <td>${businessName}</td>
+                <td>${locality}</td>
+                <td>${address}</td>
+                ${isCombinedMetrics ? `<td>${escapeHtml(item.metricName || 'N/A')}</td>` : ''}
+                <td style="text-align: right; font-weight: 600;">${formatNumber(item.total || 0)}</td>
             </tr>
         `;
     }).join('');
 
-    const totalValue = locations.reduce((sum, loc) => sum + (loc.total || 0), 0);
+    const totalValue = data.reduce((sum, item) => sum + (item.total || 0), 0);
+
+    const tableHeader = isCombinedMetrics ?
+        `<tr>
+            <th>Business Name</th>
+            <th>Locality</th>
+            <th>Address</th>
+            <th>Metric</th>
+            <th style="text-align: right;">Total</th>
+        </tr>` :
+        `<tr>
+            <th>Business Name</th>
+            <th>Locality</th>
+            <th>Address</th>
+            <th style="text-align: right;">Total</th>
+        </tr>`;
 
     return `
         <div class="summary-box">
@@ -154,12 +179,7 @@ function generateLocationSummaryTable(locations, metricName) {
         </div>
         <table>
             <thead>
-                <tr>
-                    <th>Business Name</th>
-                    <th>Locality</th>
-                    <th>Address</th>
-                    <th style="text-align: right;">Total</th>
-                </tr>
+                ${tableHeader}
             </thead>
             <tbody>
                 ${rows}

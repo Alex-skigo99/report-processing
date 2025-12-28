@@ -191,7 +191,7 @@ exports.handler = async (event) => {
         await WebsocketUtils.broadcastWebsocketMessageToOrganization(
             agency_id,
             WebSocketFlags.NEW_NOTIFICATION,
-            notificationData,
+            {notificationType: NotificationTypeConstants.NEW_REPORT, ...notificationData},
             {},
         );
         console.log("Websocket message sent successfully");
