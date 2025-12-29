@@ -84,7 +84,7 @@ function generateSubAccountChapter(subAccount, index) {
     const { name, metrics } = subAccount;
 
     return `
-        <div class="sub-account-chapter page-break" id="sub-account-${index}">
+        <div class="sub-account-chapter" id="sub-account-${index}">
             <h2 class="chapter-title">${escapeHtml(name)}</h2>
             
             ${generateMetricTables(metrics)}

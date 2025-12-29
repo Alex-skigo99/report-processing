@@ -121,6 +121,7 @@ function getStyles() {
             padding: 20px;
             background: #f9fafb;
             border-radius: 8px;
+            page-break-inside: avoid;
         }
 
         .location-title {
@@ -128,6 +129,7 @@ function getStyles() {
             font-weight: 600;
             color: #1f2937;
             margin-bottom: 15px;
+            page-break-after: avoid;
         }
         
         .summary-box {
