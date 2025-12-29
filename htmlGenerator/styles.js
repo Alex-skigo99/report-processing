@@ -54,6 +54,7 @@ function getStyles() {
             padding: 25px;
             border-radius: 8px;
             margin-bottom: 40px;
+            page-break-after: avoid;
         }
         
         .toc-title {
@@ -82,6 +83,24 @@ function getStyles() {
             font-weight: 500;
         }
 
+        .toc-sublist {
+            list-style: none;
+            margin-left: 20px;
+            margin-top: 8px;
+            border-left: 2px solid #d1d5db;
+            padding-left: 12px;
+        }
+
+        .toc-subitem {
+            padding: 4px 0;
+            color: #6b7280;
+        }
+
+        .toc-location {
+            font-size: 11px;
+            color: #4b5563;
+        }
+
         .sub-account-chapter {
             page-break-before: always;
             margin-bottom: 50px;
@@ -98,11 +117,13 @@ function getStyles() {
             margin-bottom: 30px;
             padding-bottom: 15px;
             border-bottom: 3px solid #93c5fd;
+            page-break-after: avoid;
         }
 
         .metric-section {
             margin-bottom: 40px;
             page-break-inside: avoid;
+            page-break-after: avoid;
         }
         
         .section-title {

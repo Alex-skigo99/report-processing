@@ -1,0 +1,2979 @@
+[
+    {
+        "id": "bffc93d6-3b17-4afd-9cca-9dd54e9ef957",
+        "name": "Main locations",
+        "metrics": {
+            "gmb_reinstatement": {
+                "type": "gmb_reinstatement",
+                "subAccountId": "bffc93d6-3b17-4afd-9cca-9dd54e9ef957",
+                "subAccountName": "Main locations",
+                "submissions": [
+                    {
+                        "google_listing_name": "Test company",
+                        "updated_at": "2025-12-28T14:50:22.640Z",
+                        "status": "Not Started",
+                        "invoice_status": "Waiting Completion"
+                    }
+                ],
+                "totalCount": 1,
+                "error": null
+            },
+            "gmb_verification": {
+                "type": "gmb_verification",
+                "subAccountId": "bffc93d6-3b17-4afd-9cca-9dd54e9ef957",
+                "subAccountName": "Main locations",
+                "submissions": [
+                    {
+                        "business_name": "Cafe test",
+                        "updated_at": "2025-12-28T14:55:10.253Z",
+                        "status": "Not Started",
+                        "invoice_status": "Waiting Completion"
+                    }
+                ],
+                "totalCount": 1,
+                "error": null
+            },
+            "review_removal": {
+                "type": "review_removal",
+                "subAccountId": "bffc93d6-3b17-4afd-9cca-9dd54e9ef957",
+                "subAccountName": "Main locations",
+                "submissions": [],
+                "totalCount": 0,
+                "error": null
+            },
+            "performanceMetrics": [
+                {
+                    "type": "BUSINESS_IMPRESSIONS_DESKTOP_MAPS",
+                    "subAccountName": "Main locations",
+                    "metricName": "Desktop Maps Impressions",
+                    "locations": [
+                        {
+                            "businessName": "Gloria laundry 123",
+                            "locality": "Ramat Gan",
+                            "verificationStatus": "HARD_SUSPENDED",
+                            "address": "115 David Ben Gurion Road",
+                            "error": "Request failed with status code 403",
+                            "timeSeries": null,
+                            "total": 0
+                        },
+                        {
+                            "businessName": "Nail Diana",
+                            "locality": "Lancaster",
+                            "verificationStatus": "HARD_SUSPENDED",
+                            "address": "204 South Broad Street",
+                            "error": "Request failed with status code 403",
+                            "timeSeries": null,
+                            "total": 0
+                        }
+                    ],
+                    "error": null
+                },
+                {
+                    "type": "BUSINESS_IMPRESSIONS_DESKTOP_SEARCH",
+                    "subAccountName": "Main locations",
+                    "metricName": "Desktop Search Impressions",
+                    "locations": [
+                        {
+                            "businessName": "Gloria laundry 123",
+                            "locality": "Ramat Gan",
+                            "verificationStatus": "HARD_SUSPENDED",
+                            "address": "115 David Ben Gurion Road",
+                            "error": "Request failed with status code 403",
+                            "timeSeries": null,
+                            "total": 0
+                        },
+                        {
+                            "businessName": "Nail Diana",
+                            "locality": "Lancaster",
+                            "verificationStatus": "HARD_SUSPENDED",
+                            "address": "204 South Broad Street",
+                            "error": "Request failed with status code 403",
+                            "timeSeries": null,
+                            "total": 0
+                        }
+                    ],
+                    "error": null
+                },
+                {
+                    "type": "BUSINESS_IMPRESSIONS_MOBILE_MAPS",
+                    "subAccountName": "Main locations",
+                    "metricName": "Mobile Maps Impressions",
+                    "locations": [
+                        {
+                            "businessName": "Gloria laundry 123",
+                            "locality": "Ramat Gan",
+                            "verificationStatus": "HARD_SUSPENDED",
+                            "address": "115 David Ben Gurion Road",
+                            "error": "Request failed with status code 403",
+                            "timeSeries": null,
+                            "total": 0
+                        },
+                        {
+                            "businessName": "Nail Diana",
+                            "locality": "Lancaster",
+                            "verificationStatus": "HARD_SUSPENDED",
+                            "address": "204 South Broad Street",
+                            "error": "Request failed with status code 403",
+                            "timeSeries": null,
+                            "total": 0
+                        }
+                    ],
+                    "error": null
+                },
+                {
+                    "type": "BUSINESS_IMPRESSIONS_MOBILE_SEARCH",
+                    "subAccountName": "Main locations",
+                    "metricName": "Mobile Search Impressions",
+                    "locations": [
+                        {
+                            "businessName": "Gloria laundry 123",
+                            "locality": "Ramat Gan",
+                            "verificationStatus": "HARD_SUSPENDED",
+                            "address": "115 David Ben Gurion Road",
+                            "error": "Request failed with status code 403",
+                            "timeSeries": null,
+                            "total": 0
+                        },
+                        {
+                            "businessName": "Nail Diana",
+                            "locality": "Lancaster",
+                            "verificationStatus": "HARD_SUSPENDED",
+                            "address": "204 South Broad Street",
+                            "error": "Request failed with status code 403",
+                            "timeSeries": null,
+                            "total": 0
+                        }
+                    ],
+                    "error": null
+                },
+                {
+                    "type": "BUSINESS_CONVERSATIONS",
+                    "subAccountName": "Main locations",
+                    "metricName": "Conversations",
+                    "locations": [
+                        {
+                            "businessName": "Gloria laundry 123",
+                            "locality": "Ramat Gan",
+                            "verificationStatus": "HARD_SUSPENDED",
+                            "address": "115 David Ben Gurion Road",
+                            "error": "Request failed with status code 403",
+                            "timeSeries": null,
+                            "total": 0
+                        },
+                        {
+                            "businessName": "Nail Diana",
+                            "locality": "Lancaster",
+                            "verificationStatus": "HARD_SUSPENDED",
+                            "address": "204 South Broad Street",
+                            "error": "Request failed with status code 403",
+                            "timeSeries": null,
+                            "total": 0
+                        }
+                    ],
+                    "error": null
+                },
+                {
+                    "type": "BUSINESS_DIRECTION_REQUESTS",
+                    "subAccountName": "Main locations",
+                    "metricName": "Direction Requests",
+                    "locations": [
+                        {
+                            "businessName": "Gloria laundry 123",
+                            "locality": "Ramat Gan",
+                            "verificationStatus": "HARD_SUSPENDED",
+                            "address": "115 David Ben Gurion Road",
+                            "error": "Request failed with status code 403",
+                            "timeSeries": null,
+                            "total": 0
+                        },
+                        {
+                            "businessName": "Nail Diana",
+                            "locality": "Lancaster",
+                            "verificationStatus": "HARD_SUSPENDED",
+                            "address": "204 South Broad Street",
+                            "error": "Request failed with status code 403",
+                            "timeSeries": null,
+                            "total": 0
+                        }
+                    ],
+                    "error": null
+                },
+                {
+                    "type": "CALL_CLICKS",
+                    "subAccountName": "Main locations",
+                    "metricName": "Call Clicks",
+                    "locations": [
+                        {
+                            "businessName": "Gloria laundry 123",
+                            "locality": "Ramat Gan",
+                            "verificationStatus": "HARD_SUSPENDED",
+                            "address": "115 David Ben Gurion Road",
+                            "error": "Request failed with status code 403",
+                            "timeSeries": null,
+                            "total": 0
+                        },
+                        {
+                            "businessName": "Nail Diana",
+                            "locality": "Lancaster",
+                            "verificationStatus": "HARD_SUSPENDED",
+                            "address": "204 South Broad Street",
+                            "error": "Request failed with status code 403",
+                            "timeSeries": null,
+                            "total": 0
+                        }
+                    ],
+                    "error": null
+                },
+                {
+                    "type": "WEBSITE_CLICKS",
+                    "subAccountName": "Main locations",
+                    "metricName": "Website Clicks",
+                    "locations": [
+                        {
+                            "businessName": "Gloria laundry 123",
+                            "locality": "Ramat Gan",
+                            "verificationStatus": "HARD_SUSPENDED",
+                            "address": "115 David Ben Gurion Road",
+                            "error": "Request failed with status code 403",
+                            "timeSeries": null,
+                            "total": 0
+                        },
+                        {
+                            "businessName": "Nail Diana",
+                            "locality": "Lancaster",
+                            "verificationStatus": "HARD_SUSPENDED",
+                            "address": "204 South Broad Street",
+                            "error": "Request failed with status code 403",
+                            "timeSeries": null,
+                            "total": 0
+                        }
+                    ],
+                    "error": null
+                },
+                {
+                    "type": "BUSINESS_BOOKINGS",
+                    "subAccountName": "Main locations",
+                    "metricName": "Bookings",
+                    "locations": [
+                        {
+                            "businessName": "Gloria laundry 123",
+                            "locality": "Ramat Gan",
+                            "verificationStatus": "HARD_SUSPENDED",
+                            "address": "115 David Ben Gurion Road",
+                            "error": "Request failed with status code 403",
+                            "timeSeries": null,
+                            "total": 0
+                        },
+                        {
+                            "businessName": "Nail Diana",
+                            "locality": "Lancaster",
+                            "verificationStatus": "HARD_SUSPENDED",
+                            "address": "204 South Broad Street",
+                            "error": "Request failed with status code 403",
+                            "timeSeries": null,
+                            "total": 0
+                        }
+                    ],
+                    "error": null
+                },
+                {
+                    "type": "BUSINESS_FOOD_ORDERS",
+                    "subAccountName": "Main locations",
+                    "metricName": "Food Orders",
+                    "locations": [
+                        {
+                            "businessName": "Gloria laundry 123",
+                            "locality": "Ramat Gan",
+                            "verificationStatus": "HARD_SUSPENDED",
+                            "address": "115 David Ben Gurion Road",
+                            "error": "Request failed with status code 403",
+                            "timeSeries": null,
+                            "total": 0
+                        },
+                        {
+                            "businessName": "Nail Diana",
+                            "locality": "Lancaster",
+                            "verificationStatus": "HARD_SUSPENDED",
+                            "address": "204 South Broad Street",
+                            "error": "Request failed with status code 403",
+                            "timeSeries": null,
+                            "total": 0
+                        }
+                    ],
+                    "error": null
+                },
+                {
+                    "type": "BUSINESS_FOOD_MENU_CLICKS",
+                    "subAccountName": "Main locations",
+                    "metricName": "Menu Clicks",
+                    "locations": [
+                        {
+                            "businessName": "Gloria laundry 123",
+                            "locality": "Ramat Gan",
+                            "verificationStatus": "HARD_SUSPENDED",
+                            "address": "115 David Ben Gurion Road",
+                            "error": "Request failed with status code 403",
+                            "timeSeries": null,
+                            "total": 0
+                        },
+                        {
+                            "businessName": "Nail Diana",
+                            "locality": "Lancaster",
+                            "verificationStatus": "HARD_SUSPENDED",
+                            "address": "204 South Broad Street",
+                            "error": "Request failed with status code 403",
+                            "timeSeries": null,
+                            "total": 0
+                        }
+                    ],
+                    "error": null
+                }
+            ]
+        }
+    }
+    ,
+    {
+        "id": "66927d07-db4d-4bb1-bb92-0ab4b06fd5c7",
+        "name": "other locations",
+        "metrics": {
+            "gmb_reinstatement": {
+                "type": "gmb_reinstatement",
+                "subAccountId": "66927d07-db4d-4bb1-bb92-0ab4b06fd5c7",
+                "subAccountName": "other locations",
+                "submissions": [],
+                "totalCount": 0,
+                "error": null
+            },
+            "gmb_verification": {
+                "type": "gmb_verification",
+                "subAccountId": "66927d07-db4d-4bb1-bb92-0ab4b06fd5c7",
+                "subAccountName": "other locations",
+                "submissions": [],
+                "totalCount": 0,
+                "error": null
+            },
+            "review_removal": {
+                "type": "review_removal",
+                "subAccountId": "66927d07-db4d-4bb1-bb92-0ab4b06fd5c7",
+                "subAccountName": "other locations",
+                "submissions": [],
+                "totalCount": 0,
+                "error": null
+            },
+            "performanceMetrics": [
+                {
+                    "type": "BUSINESS_IMPRESSIONS_DESKTOP_MAPS",
+                    "subAccountName": "other locations",
+                    "metricName": "Desktop Maps Impressions",
+                    "locations": [
+                        {
+                            "businessName": "Renew Local",
+                            "locality": null,
+                            "address": "",
+                            "verificationStatus": "VERIFIED",
+                            "timeSeries": [
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 1
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 2
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 3
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 4
+                                    },
+                                    "value": "2"
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 5
+                                    },
+                                    "value": "1"
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 6
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 7
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 8
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 9
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 10
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 11
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 12
+                                    },
+                                    "value": "1"
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 13
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 14
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 15
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 16
+                                    },
+                                    "value": "3"
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 17
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 18
+                                    },
+                                    "value": "3"
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 19
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 20
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 21
+                                    },
+                                    "value": "1"
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 22
+                                    },
+                                    "value": "1"
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 23
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 24
+                                    },
+                                    "value": "1"
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 25
+                                    },
+                                    "value": "1"
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 26
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 27
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 28
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 29
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 30
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 31
+                                    }
+                                }
+                            ],
+                            "total": 14
+                        }
+                    ],
+                    "error": null
+                },
+                {
+                    "type": "BUSINESS_IMPRESSIONS_DESKTOP_SEARCH",
+                    "subAccountName": "other locations",
+                    "metricName": "Desktop Search Impressions",
+                    "locations": [
+                        {
+                            "businessName": "Renew Local",
+                            "locality": null,
+                            "address": "",
+                            "verificationStatus": "VERIFIED",
+                            "timeSeries": [
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 1
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 2
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 3
+                                    },
+                                    "value": "1"
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 4
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 5
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 6
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 7
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 8
+                                    },
+                                    "value": "1"
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 9
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 10
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 11
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 12
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 13
+                                    },
+                                    "value": "1"
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 14
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 15
+                                    },
+                                    "value": "1"
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 16
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 17
+                                    },
+                                    "value": "1"
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 18
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 19
+                                    },
+                                    "value": "3"
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 20
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 21
+                                    },
+                                    "value": "3"
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 22
+                                    },
+                                    "value": "2"
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 23
+                                    },
+                                    "value": "4"
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 24
+                                    },
+                                    "value": "3"
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 25
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 26
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 27
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 28
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 29
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 30
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 31
+                                    }
+                                }
+                            ],
+                            "total": 20
+                        }
+                    ],
+                    "error": null
+                },
+                {
+                    "type": "BUSINESS_IMPRESSIONS_MOBILE_MAPS",
+                    "subAccountName": "other locations",
+                    "metricName": "Mobile Maps Impressions",
+                    "locations": [
+                        {
+                            "businessName": "Renew Local",
+                            "locality": null,
+                            "address": "",
+                            "verificationStatus": "VERIFIED",
+                            "timeSeries": [
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 1
+                                    },
+                                    "value": "1"
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 2
+                                    },
+                                    "value": "1"
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 3
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 4
+                                    },
+                                    "value": "1"
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 5
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 6
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 7
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 8
+                                    },
+                                    "value": "3"
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 9
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 10
+                                    },
+                                    "value": "2"
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 11
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 12
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 13
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 14
+                                    },
+                                    "value": "1"
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 15
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 16
+                                    },
+                                    "value": "1"
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 17
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 18
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 19
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 20
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 21
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 22
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 23
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 24
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 25
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 26
+                                    },
+                                    "value": "1"
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 27
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 28
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 29
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 30
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 31
+                                    }
+                                }
+                            ],
+                            "total": 11
+                        }
+                    ],
+                    "error": null
+                },
+                {
+                    "type": "BUSINESS_IMPRESSIONS_MOBILE_SEARCH",
+                    "subAccountName": "other locations",
+                    "metricName": "Mobile Search Impressions",
+                    "locations": [
+                        {
+                            "businessName": "Renew Local",
+                            "locality": null,
+                            "address": "",
+                            "verificationStatus": "VERIFIED",
+                            "timeSeries": [
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 1
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 2
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 3
+                                    },
+                                    "value": "1"
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 4
+                                    },
+                                    "value": "1"
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 5
+                                    },
+                                    "value": "1"
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 6
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 7
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 8
+                                    },
+                                    "value": "1"
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 9
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 10
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 11
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 12
+                                    },
+                                    "value": "1"
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 13
+                                    },
+                                    "value": "1"
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 14
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 15
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 16
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 17
+                                    },
+                                    "value": "2"
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 18
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 19
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 20
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 21
+                                    },
+                                    "value": "1"
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 22
+                                    },
+                                    "value": "1"
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 23
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 24
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 25
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 26
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 27
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 28
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 29
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 30
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 31
+                                    }
+                                }
+                            ],
+                            "total": 10
+                        }
+                    ],
+                    "error": null
+                },
+                {
+                    "type": "BUSINESS_CONVERSATIONS",
+                    "subAccountName": "other locations",
+                    "metricName": "Conversations",
+                    "locations": [
+                        {
+                            "businessName": "Renew Local",
+                            "locality": null,
+                            "address": "",
+                            "verificationStatus": "VERIFIED",
+                            "timeSeries": [
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 1
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 2
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 3
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 4
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 5
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 6
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 7
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 8
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 9
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 10
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 11
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 12
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 13
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 14
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 15
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 16
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 17
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 18
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 19
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 20
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 21
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 22
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 23
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 24
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 25
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 26
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 27
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 28
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 29
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 30
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 31
+                                    }
+                                }
+                            ],
+                            "total": 0
+                        }
+                    ],
+                    "error": null
+                },
+                {
+                    "type": "BUSINESS_DIRECTION_REQUESTS",
+                    "subAccountName": "other locations",
+                    "metricName": "Direction Requests",
+                    "locations": [
+                        {
+                            "businessName": "Renew Local",
+                            "locality": null,
+                            "address": "",
+                            "verificationStatus": "VERIFIED",
+                            "timeSeries": [
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 1
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 2
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 3
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 4
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 5
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 6
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 7
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 8
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 9
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 10
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 11
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 12
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 13
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 14
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 15
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 16
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 17
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 18
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 19
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 20
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 21
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 22
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 23
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 24
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 25
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 26
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 27
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 28
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 29
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 30
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 31
+                                    }
+                                }
+                            ],
+                            "total": 0
+                        }
+                    ],
+                    "error": null
+                },
+                {
+                    "type": "CALL_CLICKS",
+                    "subAccountName": "other locations",
+                    "metricName": "Call Clicks",
+                    "locations": [
+                        {
+                            "businessName": "Renew Local",
+                            "locality": null,
+                            "address": "",
+                            "verificationStatus": "VERIFIED",
+                            "timeSeries": [
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 1
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 2
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 3
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 4
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 5
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 6
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 7
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 8
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 9
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 10
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 11
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 12
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 13
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 14
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 15
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 16
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 17
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 18
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 19
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 20
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 21
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 22
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 23
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 24
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 25
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 26
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 27
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 28
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 29
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 30
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 31
+                                    }
+                                }
+                            ],
+                            "total": 0
+                        }
+                    ],
+                    "error": null
+                },
+                {
+                    "type": "WEBSITE_CLICKS",
+                    "subAccountName": "other locations",
+                    "metricName": "Website Clicks",
+                    "locations": [
+                        {
+                            "businessName": "Renew Local",
+                            "locality": null,
+                            "address": "",
+                            "verificationStatus": "VERIFIED",
+                            "timeSeries": [
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 1
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 2
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 3
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 4
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 5
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 6
+                                    },
+                                    "value": "1"
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 7
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 8
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 9
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 10
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 11
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 12
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 13
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 14
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 15
+                                    },
+                                    "value": "2"
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 16
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 17
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 18
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 19
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 20
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 21
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 22
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 23
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 24
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 25
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 26
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 27
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 28
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 29
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 30
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 31
+                                    }
+                                }
+                            ],
+                            "total": 3
+                        }
+                    ],
+                    "error": null
+                },
+                {
+                    "type": "BUSINESS_BOOKINGS",
+                    "subAccountName": "other locations",
+                    "metricName": "Bookings",
+                    "locations": [
+                        {
+                            "businessName": "Renew Local",
+                            "locality": null,
+                            "address": "",
+                            "verificationStatus": "VERIFIED",
+                            "timeSeries": [
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 1
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 2
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 3
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 4
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 5
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 6
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 7
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 8
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 9
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 10
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 11
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 12
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 13
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 14
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 15
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 16
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 17
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 18
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 19
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 20
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 21
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 22
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 23
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 24
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 25
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 26
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 27
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 28
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 29
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 30
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 31
+                                    }
+                                }
+                            ],
+                            "total": 0
+                        }
+                    ],
+                    "error": null
+                },
+                {
+                    "type": "BUSINESS_FOOD_ORDERS",
+                    "subAccountName": "other locations",
+                    "metricName": "Food Orders",
+                    "locations": [
+                        {
+                            "businessName": "Renew Local",
+                            "locality": null,
+                            "address": "",
+                            "verificationStatus": "VERIFIED",
+                            "timeSeries": [
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 1
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 2
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 3
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 4
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 5
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 6
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 7
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 8
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 9
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 10
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 11
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 12
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 13
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 14
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 15
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 16
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 17
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 18
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 19
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 20
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 21
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 22
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 23
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 24
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 25
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 26
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 27
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 28
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 29
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 30
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 31
+                                    }
+                                }
+                            ],
+                            "total": 0
+                        }
+                    ],
+                    "error": null
+                },
+                {
+                    "type": "BUSINESS_FOOD_MENU_CLICKS",
+                    "subAccountName": "other locations",
+                    "metricName": "Menu Clicks",
+                    "locations": [
+                        {
+                            "businessName": "Renew Local",
+                            "locality": null,
+                            "address": "",
+                            "verificationStatus": "VERIFIED",
+                            "timeSeries": [
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 1
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 2
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 3
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 4
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 5
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 6
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 7
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 8
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 9
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 10
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 11
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 12
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 13
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 14
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 15
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 16
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 17
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 18
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 19
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 20
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 21
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 22
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 23
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 24
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 25
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 26
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 27
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 28
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 29
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 30
+                                    }
+                                },
+                                {
+                                    "date": {
+                                        "year": 2025,
+                                        "month": 12,
+                                        "day": 31
+                                    }
+                                }
+                            ],
+                            "total": 0
+                        }
+                    ],
+                    "error": null
+                }
+            ]
+        }
+    }
+]

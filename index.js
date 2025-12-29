@@ -104,6 +104,9 @@ exports.handler = async (event) => {
 
         console.log("Metrics processed successfully");
 
+         // For debugging: log the final data structure
+        console.log("Final subAccountsData structure:", JSON.stringify(subAccountsData, null, 2));
+
         console.log("Generating HTML...");
         const html = generateReportHTML({
             title: reportRecord.title,
@@ -186,14 +189,22 @@ exports.handler = async (event) => {
         }));
         console.log(`HTML uploaded to S3: ${BUCKET}/${s3HtmlKey}`);
 
+        console.log("agency_id:", agency_id)
+        console.log("WebSocketFlags.NEW_NOTIFICATION:", WebSocketFlags.NEW_NOTIFICATION)
+        console.log("data:", {notificationType: NotificationTypeConstants.NEW_REPORT, ...notificationData})
+
+
         await trx.commit();
+
+        const response = {};
 
         await WebsocketUtils.broadcastWebsocketMessageToOrganization(
             agency_id,
             WebSocketFlags.NEW_NOTIFICATION,
             {notificationType: NotificationTypeConstants.NEW_REPORT, ...notificationData},
-            {},
+            response,
         );
+        console.log("Response from websocket broadcast:", response);
         console.log("Websocket message sent successfully");
 
         console.log("Report generation completed successfully");
