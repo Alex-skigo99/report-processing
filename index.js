@@ -104,7 +104,7 @@ exports.handler = async (event) => {
 
         console.log("Metrics processed successfully");
 
-         // For debugging: log the final data structure
+        // For debugging: log the final data structure
         console.log("Final subAccountsData structure:", JSON.stringify(subAccountsData, null, 2));
 
         console.log("Generating HTML...");
@@ -204,8 +204,12 @@ exports.handler = async (event) => {
             {notificationType: NotificationTypeConstants.NEW_REPORT, ...notificationData},
             response,
         );
-        console.log("Response from websocket broadcast:", response);
-        console.log("Websocket message sent successfully");
+
+        if (response.statusCode !== 200) {
+            console.error("Error broadcasting websocket message:", response);
+        } else {
+            console.log("Websocket message sent successfully");
+        }
 
         console.log("Report generation completed successfully");
         return { statusCode: 200, body: JSON.stringify({ message: "Report generated successfully" }) };
