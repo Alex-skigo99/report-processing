@@ -1,3 +1,6 @@
+// const axios = require("axios");
+// const { S3Client, PutObjectCommand } = require("@aws-sdk/client-s3");
+// const layerS3BucketConstants = require("/opt/nodejs/S3BucketConstants");
 const knex = require("/opt/nodejs/db");
 const DatabaseTableConstants = require("/opt/nodejs/DatabaseTableConstants");
 const NotificationTypeConstants = require("/opt/nodejs/NotificationTypeConstants");
@@ -7,6 +10,12 @@ const Utils = require("./utils");
 const metricUtils = require("./metricUtils");
 const { METRICS, isGooglePerformanceMetric } = require("./metricConstants");
 const { REPORT_STATUS } = require("./constants");
+// const { generateReportHTML } = require("./htmlGenerator/htmlGenerator");
+// const puppeteer = require("puppeteer-core");
+// const chromium = require("@sparticuz/chromium");
+
+// const s3 = new S3Client({});
+// const BUCKET = layerS3BucketConstants.REPORT_BUCKET;
 
 exports.handler = async (event) => {
     console.log("Got an event!");
@@ -95,7 +104,42 @@ exports.handler = async (event) => {
         console.log("Metrics processed successfully");
 
         // For debugging: log the final data structure
-        // console.log("Final subAccountsData structure:", JSON.stringify(subAccountsData, null, 2));
+        console.log("Final subAccountsData structure:", JSON.stringify(subAccountsData, null, 2));
+
+        // console.log("Generating HTML...");
+        // const html = generateReportHTML({
+        //     title: reportRecord.title,
+        //     startDate: start_date,
+        //     endDate: end_date,
+        //     organizationName: organization?.name,
+        //     subAccounts: subAccountsData,
+        // });
+
+        // console.log("HTML generated successfully");
+        // console.log(html);
+
+        // console.log("Generating PDF...");
+        // const browser = await puppeteer.launch({
+        //     args: chromium.args,
+        //     executablePath: await chromium.executablePath(),
+        //     headless: chromium.headless,
+        // });
+
+        // const page = await browser.newPage();
+        // await page.setContent(html, { waitUntil: "networkidle0" });
+        // const pdfBuffer = await page.pdf({
+        //     format: "A4",
+        //     printBackground: true,
+        //     margin: {
+        //         top: "20mm",
+        //         right: "15mm",
+        //         bottom: "20mm",
+        //         left: "15mm",
+        //     },
+        // });
+
+        // await browser.close();
+        // console.log("PDF generated successfully");
 
         reportStatus = REPORT_STATUS.COMPLETED;
 
@@ -132,6 +176,33 @@ exports.handler = async (event) => {
             data: notificationData,
         });
         console.log("Notification sent successfully");
+
+        // console.log("Uploading PDF to S3...");
+        // const s3Key = `${agency_id}/${report_id}`;
+        
+        // await s3.send(new PutObjectCommand({
+        //     Bucket: BUCKET,
+        //     Key: s3Key,
+        //     Body: pdfBuffer,
+        //     ContentType: "application/pdf",
+        // }));
+        // console.log(`PDF uploaded to S3: ${BUCKET}/${s3Key}`);
+
+        // console.log("Uploading HTML to S3...");
+        // const s3HtmlKey = `${agency_id}/${report_id}`;
+        
+        // await s3.send(new PutObjectCommand({
+        //     Bucket: BUCKET,
+        //     Key: s3HtmlKey,
+        //     Body: html,
+        //     ContentType: "text/html",
+        // }));
+        // console.log(`HTML uploaded to S3: ${BUCKET}/${s3HtmlKey}`);
+
+        console.log("agency_id:", agency_id)
+        console.log("WebSocketFlags.NEW_NOTIFICATION:", WebSocketFlags.NEW_NOTIFICATION)
+        console.log("data:", {notificationType: NotificationTypeConstants.NEW_REPORT, ...notificationData})
+
 
         await trx.commit();
 
