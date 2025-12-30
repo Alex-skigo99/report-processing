@@ -1,21 +1,21 @@
-const axios = require("axios");
-const { S3Client, PutObjectCommand } = require("@aws-sdk/client-s3");
+// const axios = require("axios");
+// const { S3Client, PutObjectCommand } = require("@aws-sdk/client-s3");
+// const layerS3BucketConstants = require("/opt/nodejs/S3BucketConstants");
 const knex = require("/opt/nodejs/db");
 const DatabaseTableConstants = require("/opt/nodejs/DatabaseTableConstants");
-const layerS3BucketConstants = require("/opt/nodejs/S3BucketConstants");
 const NotificationTypeConstants = require("/opt/nodejs/NotificationTypeConstants");
 const WebSocketFlags = require("/opt/nodejs/WebsocketFlags");
 const WebsocketUtils = require("/opt/nodejs/WebsocketUtils");
 const Utils = require("./utils");
 const metricUtils = require("./metricUtils");
-const { generateReportHTML } = require("./htmlGenerator/htmlGenerator");
 const { METRICS, isGooglePerformanceMetric } = require("./metricConstants");
 const { REPORT_STATUS } = require("./constants");
+// const { generateReportHTML } = require("./htmlGenerator/htmlGenerator");
 // const puppeteer = require("puppeteer-core");
 // const chromium = require("@sparticuz/chromium");
 
-const s3 = new S3Client({});
-const BUCKET = layerS3BucketConstants.REPORT_BUCKET;
+// const s3 = new S3Client({});
+// const BUCKET = layerS3BucketConstants.REPORT_BUCKET;
 
 exports.handler = async (event) => {
     console.log("Got an event!");
@@ -101,23 +101,22 @@ exports.handler = async (event) => {
                 metrics: subAccountMetrics
             });
         }
-
         console.log("Metrics processed successfully");
 
         // For debugging: log the final data structure
         console.log("Final subAccountsData structure:", JSON.stringify(subAccountsData, null, 2));
 
-        console.log("Generating HTML...");
-        const html = generateReportHTML({
-            title: reportRecord.title,
-            startDate: start_date,
-            endDate: end_date,
-            organizationName: organization?.name,
-            subAccounts: subAccountsData,
-        });
+        // console.log("Generating HTML...");
+        // const html = generateReportHTML({
+        //     title: reportRecord.title,
+        //     startDate: start_date,
+        //     endDate: end_date,
+        //     organizationName: organization?.name,
+        //     subAccounts: subAccountsData,
+        // });
 
-        console.log("HTML generated successfully");
-        console.log(html);
+        // console.log("HTML generated successfully");
+        // console.log(html);
 
         // console.log("Generating PDF...");
         // const browser = await puppeteer.launch({
@@ -144,14 +143,25 @@ exports.handler = async (event) => {
 
         reportStatus = REPORT_STATUS.COMPLETED;
 
+        const reportData = {
+            title: reportRecord.title,
+            startDate: start_date,
+            endDate: end_date,
+            organizationName: organization?.name,
+            subAccounts: subAccountsData,
+        };
+
+        console.log("Updating report status and data in database...");
+
         await trx(DatabaseTableConstants.AGENCY_REPORT_TABLE)
             .where("id", report_id)
             .update({
+                // report_data: JSON.stringify(reportData),
                 status: reportStatus,
                 updated_at: knex.fn.now(),
             });
 
-        console.log("Report status updated to completed");
+        console.log("Report status and data updated to completed");
 
         const notificationData = {
             id: report_id,
@@ -178,16 +188,16 @@ exports.handler = async (event) => {
         // }));
         // console.log(`PDF uploaded to S3: ${BUCKET}/${s3Key}`);
 
-        console.log("Uploading HTML to S3...");
-        const s3HtmlKey = `${agency_id}/${report_id}`;
+        // console.log("Uploading HTML to S3...");
+        // const s3HtmlKey = `${agency_id}/${report_id}`;
         
-        await s3.send(new PutObjectCommand({
-            Bucket: BUCKET,
-            Key: s3HtmlKey,
-            Body: html,
-            ContentType: "text/html",
-        }));
-        console.log(`HTML uploaded to S3: ${BUCKET}/${s3HtmlKey}`);
+        // await s3.send(new PutObjectCommand({
+        //     Bucket: BUCKET,
+        //     Key: s3HtmlKey,
+        //     Body: html,
+        //     ContentType: "text/html",
+        // }));
+        // console.log(`HTML uploaded to S3: ${BUCKET}/${s3HtmlKey}`);
 
         console.log("agency_id:", agency_id)
         console.log("WebSocketFlags.NEW_NOTIFICATION:", WebSocketFlags.NEW_NOTIFICATION)
