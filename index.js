@@ -112,7 +112,7 @@ exports.handler = async (event) => {
         await trx(DatabaseTableConstants.AGENCY_REPORT_TABLE)
             .where("id", report_id)
             .update({
-                // report_data: JSON.stringify(reportData),
+                report_data: JSON.stringify(reportData),
                 status: reportStatus,
                 updated_at: knex.fn.now(),
             });
